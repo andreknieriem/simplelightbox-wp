@@ -1,0 +1,30 @@
+
+.sl-overlay {
+	background: #ffffff;
+	opacity: 0.7;
+	z-index: 1006;
+}
+	
+.sl-navigation button, .sl-close, .sl-counter {
+	color: #000000;
+	z-index: 1015;
+}
+	
+.sl-image {
+	z-index: 9000;
+}	
+	
+.sl-spinner {
+	border-color: #333333;
+	z-index: 1007;
+}
+	
+.sl-wrapper {
+	z-index: 1000;
+}
+	
+.sl-wrapper .sl-image .sl-caption {
+	background: #000000;
+	color: #ffffff;
+	opacity: 0.8;
+}	

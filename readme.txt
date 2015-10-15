@@ -1,0 +1,74 @@
+=== Simplelightbox ===
+Contributors: aknieriem
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZQZMVV5BQ4YC
+Tags: lightbox, simple, image, overlay, modal, dialog
+Requires at least: 3.0.1
+Tested up to: 3.4
+Stable tag: 1.4.2
+License: MIT
+License URI: https://opensource.org/licenses/MIT
+
+Touch-friendly image lightbox for mobile and desktop with jQuery
+
+== Description ==
+
+The simplelightbox wordpress plugin brings the [simplelightbox](https://github.com/andreknieriem/simplelightbox) jquery plugin to wordpress. 
+
+You can change every option that the lightbox have in the admin panel under Design -> Simplelightbox.
+
+== Installation ==
+
+= Install =
+
+1. Upload the 'simplelightbox' folder  to the '/wp-content/plugins/' directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Go to Design -> Simplelightbox and set up the lightbox like you want
+
+= Uninstall =
+
+1. Deactivate Simplelightbox in the 'Plugins' menu in Wordpress.
+2. After Deactivation a 'Delete' link appears below the plugin name, follow the link and confim with 'Yes, Delete these files'.
+3. This will delete all the plugin files from the server as well as erasing all options the plugin has stored in the database.
+
+
+== Frequently Asked Questions ==
+
+= Where can I get support? =
+
+Please visit the [Support Forum](http://wordpress.org/support/plugin/simplelightbox "Use this for support and feature requests")
+for questions, answers, support and feature requests.
+
+== Screenshots ==
+
+1. Admin page where you setup the plugin
+
+== Changelog ==
+
+= 1.4.2 =
+* Bugfix for issue #2 - Drop Event does not fire when mouse leaves window
+* Increased Z-index
+
+= 1.4 =
+* Caption Attribute can now be what, you want, or data-title 
+* Fixed some small issues
+
+= 1.3.1 =
+* Bugfix: disable keyboard control if lightbox is closed
+
+= 1.3.0  =
+* Added current index indicator/counter
+
+= 1.2.0 =
+* Added option for captions attribute (title or data-title)
+
+= 1.1.2 =
+* Bugfix for looping images
+
+= 1.1.1 =
+* Bugfix for loading indicator and removed a log-event
+
+= 1.1.0 =
+* Added classname for lightbox wrapper and width/height ratio
+
+= 1.0.0 =
+* Initial Release
