@@ -1,0 +1,233 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: simplelightbox\n"
+"POT-Creation-Date: 2015-11-03 08:56+0100\n"
+"PO-Revision-Date: 2015-11-03 08:56+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../simplelightbox.php:50
+msgid "Class Name"
+msgstr ""
+
+#: ../simplelightbox.php:50
+msgid "adds a class to the wrapper of the lightbox"
+msgstr ""
+
+#: ../simplelightbox.php:51
+msgid "Show Overlay"
+msgstr ""
+
+#: ../simplelightbox.php:51
+msgid "show an overlay or not"
+msgstr ""
+
+#: ../simplelightbox.php:52
+msgid "Show Spinner"
+msgstr ""
+
+#: ../simplelightbox.php:52
+msgid "show spinner or not"
+msgstr ""
+
+#: ../simplelightbox.php:53
+msgid "Show Navigation"
+msgstr ""
+
+#: ../simplelightbox.php:53
+msgid "show arrow-navigation or not"
+msgstr ""
+
+#: ../simplelightbox.php:54
+msgid "Text/Html for Prev Button"
+msgstr ""
+
+#: ../simplelightbox.php:55
+msgid "Text/Html for Next Button"
+msgstr ""
+
+#: ../simplelightbox.php:56
+msgid "Show Captions"
+msgstr ""
+
+#: ../simplelightbox.php:56
+msgid "show captions if availabled or not"
+msgstr ""
+
+#: ../simplelightbox.php:57
+msgid "Caption-Selector"
+msgstr ""
+
+#: ../simplelightbox.php:57
+msgid "set the element where the caption is. Set it to \"self\" for the A-Tag itself"
+msgstr ""
+
+#: ../simplelightbox.php:58
+msgid "Caption-Type"
+msgstr ""
+
+#: ../simplelightbox.php:58
+msgid "how to get the caption. You can choose between attr, data or text"
+msgstr ""
+
+#: ../simplelightbox.php:59
+msgid "Caption Attribute"
+msgstr ""
+
+#: ../simplelightbox.php:59
+msgid "get the caption from given attribute"
+msgstr ""
+
+#: ../simplelightbox.php:60
+msgid "Show Close Button"
+msgstr ""
+
+#: ../simplelightbox.php:60
+msgid "show the close button or not"
+msgstr ""
+
+#: ../simplelightbox.php:61
+msgid "Text/Html for Close Button"
+msgstr ""
+
+#: ../simplelightbox.php:62
+msgid "Show Counter"
+msgstr ""
+
+#: ../simplelightbox.php:62
+msgid "show current image index or not"
+msgstr ""
+
+#: ../simplelightbox.php:63
+msgid "File Extensions"
+msgstr ""
+
+#: ../simplelightbox.php:63
+msgid "list of fileextensions the plugin works with"
+msgstr ""
+
+#: ../simplelightbox.php:64
+msgid "Animation-Speed"
+msgstr ""
+
+#: ../simplelightbox.php:65
+msgid "Enable Preloading"
+msgstr ""
+
+#: ../simplelightbox.php:65
+msgid "allows preloading next und previous images"
+msgstr ""
+
+#: ../simplelightbox.php:66
+msgid "Enable Keyboard"
+msgstr ""
+
+#: ../simplelightbox.php:66
+msgid "allow keyboard arrow navigation and close with ESC key"
+msgstr ""
+
+#: ../simplelightbox.php:67
+msgid "Enable Looping"
+msgstr ""
+
+#: ../simplelightbox.php:67
+msgid "enables looping through images"
+msgstr ""
+
+#: ../simplelightbox.php:68
+msgid "Doc Close"
+msgstr ""
+
+#: ../simplelightbox.php:68
+msgid "closes the lightbox when clicking outside"
+msgstr ""
+
+#: ../simplelightbox.php:69
+msgid "Swipe-Tolerance"
+msgstr ""
+
+#: ../simplelightbox.php:69
+msgid "how much pixel you have to swipe, until next or previous image"
+msgstr ""
+
+#: ../simplelightbox.php:70
+msgid "Width Ratio"
+msgstr ""
+
+#: ../simplelightbox.php:70
+msgid "Ratio of image width to screen width"
+msgstr ""
+
+#: ../simplelightbox.php:71
+msgid "Height Ratio"
+msgstr ""
+
+#: ../simplelightbox.php:71
+msgid "Ratio of image height to screen height"
+msgstr ""
+
+#: ../simplelightbox.php:72
+msgid "Overlay Color"
+msgstr ""
+
+#: ../simplelightbox.php:72
+msgid "Overlay Background-Color"
+msgstr ""
+
+#: ../simplelightbox.php:73
+msgid "Overlay Opacity"
+msgstr ""
+
+#: ../simplelightbox.php:74
+msgid "Button Color"
+msgstr ""
+
+#: ../simplelightbox.php:74
+msgid "Navigation/Close Button Color"
+msgstr ""
+
+#: ../simplelightbox.php:75
+msgid "Loader Color"
+msgstr ""
+
+#: ../simplelightbox.php:76
+msgid "Caption background-color"
+msgstr ""
+
+#: ../simplelightbox.php:77
+msgid "Caption font-color"
+msgstr ""
+
+#: ../simplelightbox.php:78
+msgid "Caption Opacity"
+msgstr ""
+
+#: ../simplelightbox.php:79
+msgid "Minimal Z-Index"
+msgstr ""
+
+#: ../simplelightbox.php:79
+msgid "The minimum z-index for all lightbox elements."
+msgstr ""
+
+#: ../simplelightbox.php:81
+msgid "Section"
+msgstr ""
+
+#: ../simplelightbox.php:127
+msgid "Simplelightbox Settings"
+msgstr ""
+
+#: ../simplelightbox.php:172
+msgid "Settings"
+msgstr ""

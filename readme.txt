@@ -3,8 +3,8 @@ Contributors: aknieriem
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZQZMVV5BQ4YC
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 1.4.2
+Tested up to: 4.3.1
+Stable tag: 1.4.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,20 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 1.4.6 =
+* Added localization file and new version of simplelightbox.js (1.4.6)
+
+= 1.4.5 =
+* Added new simplelightbox.js Options for captions
+
+= 1.4.4 =
+* Bugfix saving does not work
+* Added new version of simplelightbox.js (1.4.5)
+
+= 1.4.3 =
+* Added new Options for styling the lightbox
+* Bugfix z-index for spinner to low
+* Added new version of simplelightbox.js
 
 = 1.4.2 =
 * Bugfix for issue #2 - Drop Event does not fire when mouse leaves window
