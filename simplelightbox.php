@@ -13,7 +13,8 @@ Copyright 2015 Andre Rinas (info@andreknieriem.de)
 */
 class SimpleLightbox {
 
-	private $options = array();
+	public $menu_id;
+	public $options = array();
 
 	protected static $instance = null;
 
@@ -336,7 +337,7 @@ class SimpleLightbox {
 	}
 
 	//== the auto add class hook
-	function autoexpand_rel_wlightbox ($content) {
+	public function autoexpand_rel_wlightbox ($content) {
 		global $post;
 		$pattern     = "/(<a(?![^>]*?rel=['\"]lightbox.*)[^>]*?href=['\"][^'\"]+?\.(?:bmp|gif|jpg|jpeg|png)['\"][^\>]*)>/i";
 		$replacement = '$1 class="simplelightbox" rel="lightbox['.$post->ID.']">';
@@ -353,7 +354,7 @@ class SimpleLightbox {
 .sl-spinner{border-color:'.$this->options['ar_sl_loaderColor'].';z-index:'.($this->options['ar_sl_zindex'] + 7).';}
 .sl-wrapper{z-index:'.$this->options['ar_sl_zindex'].';}
 .sl-wrapper .sl-image .sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
-		</style>';
+</style>';
 	}
 }
 
