@@ -306,7 +306,6 @@ class SimpleLightbox {
 		wp_enqueue_script('simplelightbox', plugins_url('/dist/simple-lightbox.min.js', __FILE__), array('jquery'), '1.4.5', true);
 
 		//== simplelightbox JS hook
-		//wp_register_script( 'simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__) );
 		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array('jquery', 'simplelightbox'), '1.4.5', true);
 		//== simplelghtbox options
 		wp_localize_script('simplelightbox-call', 'php_vars', $this->options);
@@ -314,7 +313,6 @@ class SimpleLightbox {
 
 		//== simplelightbox style
 		wp_enqueue_style('simplelightbox-css', plugins_url('/dist/simplelightbox.min.css', __FILE__));
-		wp_enqueue_style('simplelightbox-addcss', plugins_url('/resources/css/dynamic.css', __FILE__));
 
 		add_filter('the_content', array($this, 'autoexpand_rel_wlightbox'), 99);
 		add_filter('the_excerpt', array($this, 'autoexpand_rel_wlightbox'), 99);
@@ -350,11 +348,11 @@ class SimpleLightbox {
 	public function output_css() {
 		echo '<style>
 .sl-overlay{background:'.$this->options['ar_sl_overlayColor'].';opacity: '.$this->options['ar_sl_overlayOpacity'].';z-index: '.($this->options['ar_sl_zindex'] + 6).';}
-.sl-navigation button,.sl-close,.sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 15).';}
-.sl-image{z-index:'.($this->options['ar_sl_zindex'] + 8000).';}
+.sl-wrapper .sl-navigation button,.sl-wrapper .sl-close,.sl-wrapper .sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 15).';}
+.sl-wrapper .sl-image{z-index:'.($this->options['ar_sl_zindex'] + 8000).';}
 .sl-spinner{border-color:'.$this->options['ar_sl_loaderColor'].';z-index:'.($this->options['ar_sl_zindex'] + 7).';}
 .sl-wrapper{z-index:'.$this->options['ar_sl_zindex'].';}
-.sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
+.sl-wrapper .sl-image .sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
 		</style>';
 	}
 }
