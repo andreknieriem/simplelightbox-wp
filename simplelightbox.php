@@ -13,7 +13,7 @@ Copyright 2015 Andre Rinas (info@andreknieriem.de)
 */
 class SimpleLightbox {
 
-	private $options;
+	private $options = array();
 
 	protected static $instance = null;
 
@@ -54,7 +54,7 @@ class SimpleLightbox {
 
 		// Set options or use defaults
 		foreach($options as $k => $v) {
-			$this->options[$k] = get_option($k) || $v;
+			$this->options[$k] = get_option($k) ? : $v;
 		}
 
 		// Load up the localization file if we're using WordPress in a different language
