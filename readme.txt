@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
 Tested up to: 4.3.1
-Stable tag: 1.4.5
+Stable tag: 1.5.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 1.5.0 =
+* Added simplelightbox.js (1.5.0) with the two new options
+
 = 1.4.6 =
 * Added localization file and new version of simplelightbox.js (1.4.6)
 

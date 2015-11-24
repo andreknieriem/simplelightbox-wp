@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: simplelightbox\n"
-"POT-Creation-Date: 2015-11-03 08:56+0100\n"
-"PO-Revision-Date: 2015-11-03 08:56+0100\n"
+"POT-Creation-Date: 2015-11-09 10:50+0100\n"
+"PO-Revision-Date: 2015-11-09 10:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -177,57 +177,73 @@ msgid "Ratio of image height to screen height"
 msgstr ""
 
 #: ../simplelightbox.php:72
-msgid "Overlay Color"
+msgid "Disable rightclick"
 msgstr ""
 
 #: ../simplelightbox.php:72
-msgid "Overlay Background-Color"
+msgid "disable rightclick on image or not"
 msgstr ""
 
 #: ../simplelightbox.php:73
-msgid "Overlay Opacity"
+msgid "Disable scroll"
+msgstr ""
+
+#: ../simplelightbox.php:73
+msgid "stop scrolling page if lightbox is opened"
 msgstr ""
 
 #: ../simplelightbox.php:74
-msgid "Button Color"
+msgid "Overlay Color"
 msgstr ""
 
 #: ../simplelightbox.php:74
-msgid "Navigation/Close Button Color"
+msgid "Overlay Background-Color"
 msgstr ""
 
 #: ../simplelightbox.php:75
-msgid "Loader Color"
+msgid "Overlay Opacity"
 msgstr ""
 
 #: ../simplelightbox.php:76
-msgid "Caption background-color"
+msgid "Button Color"
+msgstr ""
+
+#: ../simplelightbox.php:76
+msgid "Navigation/Close Button Color"
 msgstr ""
 
 #: ../simplelightbox.php:77
-msgid "Caption font-color"
+msgid "Loader Color"
 msgstr ""
 
 #: ../simplelightbox.php:78
+msgid "Caption background-color"
+msgstr ""
+
+#: ../simplelightbox.php:79
+msgid "Caption font-color"
+msgstr ""
+
+#: ../simplelightbox.php:80
 msgid "Caption Opacity"
 msgstr ""
 
-#: ../simplelightbox.php:79
+#: ../simplelightbox.php:81
 msgid "Minimal Z-Index"
 msgstr ""
 
-#: ../simplelightbox.php:79
+#: ../simplelightbox.php:81
 msgid "The minimum z-index for all lightbox elements."
 msgstr ""
 
-#: ../simplelightbox.php:81
+#: ../simplelightbox.php:83
 msgid "Section"
 msgstr ""
 
-#: ../simplelightbox.php:127
+#: ../simplelightbox.php:129
 msgid "Simplelightbox Settings"
 msgstr ""
 
-#: ../simplelightbox.php:172
+#: ../simplelightbox.php:174
 msgid "Settings"
 msgstr ""

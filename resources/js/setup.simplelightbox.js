@@ -1,8 +1,8 @@
 jQuery(document).ready(function($) {
 	var options = {
-		overlay: (php_vars.ar_sl_overlay == '1') ? true : false,
-		spinner: (php_vars.ar_sl_spinner == '1') ? true : false,
-		nav: (php_vars.ar_sl_nav === '1') ? true : false,
+		overlay: 		(php_vars.ar_sl_overlay == '1') ? true : false,
+		spinner: 		(php_vars.ar_sl_spinner == '1') ? true : false,
+		nav: 			(php_vars.ar_sl_nav === '1') ? true : false,
 		navText:		[php_vars.ar_sl_navtextPrev,php_vars.ar_sl_navtextNext],
 		captions:		(php_vars.ar_sl_caption === '1') ? true : false,
 		captionSelector:php_vars.ar_sl_captionSelector,
@@ -20,7 +20,9 @@ jQuery(document).ready(function($) {
 	 	swipeTolerance: parseInt(php_vars.ar_sl_swipeTolerance,10),
 	 	className:		php_vars.ar_sl_className,
 	 	widthRatio: 	php_vars.ar_sl_widthRatio,
-	 	heightRatio: 	php_vars.ar_sl_heightRatio
+	 	heightRatio: 	php_vars.ar_sl_heightRatio,
+	 	disableRightClick:	(php_vars.ar_sl_disableRightClick == '1') ? true : false,
+	 	disableScroll:		(php_vars.ar_sl_disableScroll == '1') ? true : false,
 	}
 	if($('a.simplelightbox ').length ) {
 		var simplelightbox = $("a.simplelightbox").simpleLightbox(options);
