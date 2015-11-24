@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 Plugin Name: Simplelightbox
 Plugin URI: http://andreknieriem.de/simple-lightbox/
 Description: Touch-friendly image lightbox for mobile and desktop with jQuery for Wordpress
@@ -195,6 +195,7 @@ class SimpleLightbox {
 				'label' => __('Height Ratio', 'simplelightbox'),
 				'desc'  => __('Ratio of image height to screen height', 'simplelightbox')
 			),
+
 			'ar_sl_disableRightClick' => array(
 				'type' => 'checkbox', 
 				'label' => __('Disable rightclick','simplelightbox'), 
