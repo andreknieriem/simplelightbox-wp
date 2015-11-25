@@ -58,7 +58,7 @@ class SimpleLightbox {
 
 		// Set options or use defaults
 		foreach($options as $k => $v) {
-			$this->options[$k] = get_option($k) ? : $v;
+			$this->options[$k] = get_option($k) ? get_option($k) : $v;
 		}
 
 		// Load up the localization file if we're using WordPress in a different language
@@ -371,4 +371,4 @@ class SimpleLightbox {
 	}
 }
 
-add_action('plugins_loaded', ['SimpleLightbox', 'get_instance']);
+add_action('plugins_loaded', array('SimpleLightbox', 'get_instance'));
