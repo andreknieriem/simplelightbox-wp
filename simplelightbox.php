@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: http://andreknieriem.de/simple-lightbox/
 Description: Touch-friendly image lightbox for mobile and desktop with jQuery for Wordpress
-Version: 1.5.1
+Version: 1.6.0
 Author: Andre Rinas
 Author URI: http://andreknieriem.de
 Support URI: http://andreknieriem.de
@@ -26,14 +26,15 @@ class SimpleLightbox {
 			'ar_sl_overlay'          => 1,
 			'ar_sl_spinner'          => 1,
 			'ar_sl_nav'              => 1,
-			'ar_sl_navtextPrev'      => '←',
-			'ar_sl_navtextNext'      => '→',
+			'ar_sl_navtextPrev'      => '‹',
+			'ar_sl_navtextNext'      => '›',
 			'ar_sl_caption'          => 1,
 			'ar_sl_captionSelector'  => 'img',
 			'ar_sl_captionType'      => 'attr',
 			'ar_sl_captionData'      => 'title',
+			'ar_sl_captionPosition'  => 'bottom',
 			'ar_sl_close'            => 1,
-			'ar_sl_closeText'        => 'X',
+			'ar_sl_closeText'        => '×',
 			'ar_sl_counter'          => 1,
 			'ar_sl_fileExt'          => 'png|jpg|jpeg|gif',
 			'ar_sl_animationSpeed'   => 250,
@@ -60,7 +61,7 @@ class SimpleLightbox {
 		foreach($options as $k => $v) {
 			$this->options[$k] = get_option($k) ? get_option($k) : $v;
 		}
-
+		
 		// Load up the localization file if we're using WordPress in a different language
 		// Place it in this plugin's "localization" folder and name it "simplelightbox-[value in wp-config].mo"
 		load_plugin_textdomain('simplelightbox', false, '/simplelightbox/localization');
@@ -136,6 +137,12 @@ class SimpleLightbox {
 				'type' => 'text',
 				'label' => __('Caption Attribute', 'simplelightbox'),
 				'desc' => __('get the caption from given attribute', 'simplelightbox')
+			),
+			'ar_sl_captionPosition' => array(
+				'type' => 'select',
+				'label' => __('Caption Position', 'simplelightbox'),
+				'desc' => __('The position of the caption. Options are top, bottom or outside (note that outside can be outside the visible viewport!)', 'simplelightbox'),
+				'options' => array('top' => __('Top', 'simplelightbox'), 'bottom' => __('Bottom', 'simplelightbox'), 'outside' => __('Outside', 'simplelightbox'))
 			),
 			'ar_sl_close' => array(
 				'type'  => 'checkbox',
@@ -255,7 +262,8 @@ class SimpleLightbox {
 				array(
 					'type' => $f['type'],
 					'slug' => $slug,
-					'desc' => isset($f['desc']) ? $f['desc'] : ''
+					'desc' => isset($f['desc']) ? $f['desc'] : '',
+					'options' => $f['options']
 				)
 			);
 			register_setting($sec, $slug);
@@ -265,17 +273,25 @@ class SimpleLightbox {
 	public function display_form_field($opt){
 		switch($opt['type']) {
 			case 'checkbox':
-			echo '<label><input type="checkbox" name="'.$opt['slug'].'" id="'.$opt['slug'].'" value="1" '.checked(1, get_option($opt['slug']), false).'> '.$opt['desc'].'</label>';
+			echo '<label><input type="checkbox" name="'.$opt['slug'].'" id="'.$opt['slug'].'" value="1" '.checked(1, $this->options[$opt['slug']], false).'> '.$opt['desc'].'</label>';
 			break;
 
 			case 'text':
-			echo '<input type="text" name="'.$opt['slug'].'" class="regular-text" id="'.$opt['slug'].'" value="'.get_option($opt['slug']).'">';
+			echo '<input type="text" name="'.$opt['slug'].'" class="regular-text" id="'.$opt['slug'].'" value="'.$this->options[$opt['slug']].'">';
 			break;
-
+			
+			case 'select':
+			echo '<select name="'.$opt['slug'].'" id="'.$opt['slug'].'">';
+				foreach($opt['options'] as $v=>$option){
+					echo '<option '.selected( $this->options[$opt['slug']], $v, false).' value="'.$v.'">'.$option.'</option>';
+				}
+			echo '</select>';
+			break;
+			
 			case 'color':
 			echo '
 			<div class="colorWrap">
-				<input type="text" class="regular-text" name="'.$opt['slug'].'" value="'.get_option($opt['slug']).'">
+				<input type="text" class="regular-text" name="'.$opt['slug'].'" value="'.$this->options[$opt['slug']].'">
 				<div class="colorSelector">
 					<div></div>
 				</div>
@@ -317,10 +333,10 @@ class SimpleLightbox {
 
 	//== load simplelightbox components
 	public function load() {
-		wp_enqueue_script('simplelightbox', plugins_url('/dist/simple-lightbox.min.js', __FILE__), array('jquery'), '1.5.1', true);
+		wp_enqueue_script('simplelightbox', plugins_url('/dist/simple-lightbox.min.js', __FILE__), array('jquery'), '1.6.0', true);
 
 		//== simplelightbox JS hook
-		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array('jquery', 'simplelightbox'), '1.5.1', true);
+		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array('jquery', 'simplelightbox'), '1.6.0', true);
 		//== simplelghtbox options
 		wp_localize_script('simplelightbox-call', 'php_vars', $this->options);
 		wp_enqueue_script('simplelightbox-call');
@@ -338,8 +354,8 @@ class SimpleLightbox {
 		wp_enqueue_style('simplelightbox-admin-css', plugins_url('/resources/css/ar-sl-admin.css', __FILE__));
 
 		//== js
-		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '1.5.1', true);
-		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '1.5.1', true);
+		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '1.6.0', true);
+		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '1.6.0', true);
 	}
 
 	//== add settings link on plugin page

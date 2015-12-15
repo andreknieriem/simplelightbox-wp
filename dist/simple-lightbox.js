@@ -20,6 +20,7 @@ $.fn.simpleLightbox = function( options )
 		captionSelector:	'img',
 		captionType:		'attr',
 		captionsData:		'title',
+		captionPosition:	'bottom',
 		close:				true,
 		closeText:			'×',
 		showCounter:		true,
@@ -81,7 +82,7 @@ $.fn.simpleLightbox = function( options )
 		animating = false,
 		index = 0,
 		image = $(),
-		caption = $('<div>').addClass('sl-caption'),
+		caption = $('<div>').addClass('sl-caption pos-'+options.captionPosition),
 		wrapper = $('<div>').addClass('sl-wrapper').addClass(options.className).html('<div class="sl-image"></div>'),
 		isValidLink = function( element ){
 			if(!options.fileExt) return true;
@@ -160,6 +161,12 @@ $.fn.simpleLightbox = function( options )
 					var captionText = cSel.prop(options.captionsData);
 				}
 				
+				if(!options.loop) {
+					if(index == 0){ $('.sl-prev').hide();}
+					if(index >= $(selector).length -1) {$('.sl-next').hide();}
+					if(index > 0 && index < $(selector).length -1){ $('.sl-prev, .sl-next').show(); }
+				}
+				
 				if(dir == 1 || dir == -1){
 					var css = { 'opacity': 1.0 };
 					if( canTransisions ) {
@@ -173,11 +180,11 @@ $.fn.simpleLightbox = function( options )
 						animating = false;
 						setCaption(captionText);
 					});
-					
 				} else {
 					animating = false;
 					setCaption(captionText);
 				}
+				
 			}
 		},
 		setCaption = function(captiontext){
@@ -202,7 +209,6 @@ $.fn.simpleLightbox = function( options )
 		    spinner.show();
 		var newIndex = index + dir;
 			if(animating || (newIndex < 0 || newIndex >= $(selector).length) && options.loop == false ) return;
-			animating = true;
 			index = (newIndex < 0) ? $(selector).length -1: (newIndex > $(selector).length -1) ? 0 : newIndex;
 			$('.sl-wrapper .sl-counter .sl-current').text(index +1);
       	var css = { 'opacity': 0 };
@@ -233,6 +239,7 @@ $.fn.simpleLightbox = function( options )
 		    });
 		    curImg = $();
 		    opened = false;
+		    animating = false;
 		},
 		handleScrollbar = function(type){
 			if(type == 'hide'){
@@ -249,7 +256,6 @@ $.fn.simpleLightbox = function( options )
 				    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
 				    $(document.body)[0].removeChild(scrollDiv);
 				    $('body').data('padding',padding);
-				    console.log(padding, scrollbarWidth);
 				    if(scrollbarWidth > 0){
 				    	$('body').css({'padding-right':padding+scrollbarWidth, 'overflow':'hidden'});
 				    }

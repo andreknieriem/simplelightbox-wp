@@ -13,7 +13,7 @@ Of course you can download the plugin from here and install this zip file.
 
 The Plugin only needs to be installed. After that, the plugin works. It scans every Anchor Tag which linked to an image.
 
-### Options
+###Options
 | Property | Default | Type | Description |
 | -------- | ------- | ---- | ----------- |
 | overlay | true | bool | show an overlay or not |
@@ -24,10 +24,11 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | captionSelector | 'img' | string | set the element where the caption is. Set it to "self" for the A-Tag itself |
 | captionType | 'attr' | string | how to get the caption. You can choose between attr, data or text |
 | captionsData | title | string | get the caption from given attribute |
+| captionPosition | 'bottom' | string | the position of the caption. Options are top, bottom or outside (note that outside can be outside the visible viewport!) |
 | close | true | bool | show the close button or not |
-| closeText | 'X' | string | text or html for the close button |
+| closeText | '×' | string | text or html for the close button |
 | showCounter | true | bool | show current image index or not |
-| fileExt | 'png&#124;jpg&#124;jpeg&#124;gif' | regexp | list of fileextensions the plugin works with | 
+| fileExt | 'png&#124;jpg&#124;jpeg&#124;gif' | regexp or false | list of fileextensions the plugin works with or false for disable the check | 
 | animationSpeed | 250 | int | how long takes the slide animation |
 | preloading | true | bool | allows preloading next und previous images |
 | enableKeyboard | true | bool | allow keyboard arrow navigation and close with ESC key |
@@ -37,3 +38,5 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | className: | 'simple-lightbox' | string | adds a class to the wrapper of the lightbox |
 | widthRatio: | 0.8 | float | Ratio of image width to screen width |
 | heightRatio: | 0.9 | float | Ratio of image height to screen height |
+| disableRightClick | false | bool | disable rightclick on image or not |
+| disableScroll | true | bool | stop scrolling page if lightbox is opened |

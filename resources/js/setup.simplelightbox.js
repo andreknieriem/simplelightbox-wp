@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
 		captionSelector:php_vars.ar_sl_captionSelector,
 		captionType: 	php_vars.ar_sl_captionType,
 		captionsData:	php_vars.ar_sl_captionData,
+		captionPosition:php_vars.ar_sl_captionPosition,
 		close:			(php_vars.ar_sl_close === '1') ? true : false,
 		closeText:		php_vars.ar_sl_closeText,
 		showCounter:	(php_vars.ar_sl_counter === '1') ? true : false,
@@ -24,6 +25,9 @@ jQuery(document).ready(function($) {
 	 	disableRightClick:	(php_vars.ar_sl_disableRightClick == '1') ? true : false,
 	 	disableScroll:		(php_vars.ar_sl_disableScroll == '1') ? true : false,
 	}
+	
+	console.log(php_vars.ar_sl_captionPosition);
+	
 	if($('a.simplelightbox ').length ) {
 		var simplelightbox = $("a.simplelightbox").simpleLightbox(options);
 	}
