@@ -263,7 +263,7 @@ class SimpleLightbox {
 					'type' => $f['type'],
 					'slug' => $slug,
 					'desc' => isset($f['desc']) ? $f['desc'] : '',
-					'options' => $f['options']
+					'options' => isset($f['options']) ? $f['options'] : array(),
 				)
 			);
 			register_setting($sec, $slug);
