@@ -76,6 +76,10 @@ class SimpleLightbox {
 		// Set options or use defaults
 		foreach($options as $k => $v) {
 			$this->options[$k] = get_option($k) ? get_option($k) : $v;
+
+			if(get_option($k) == ''){
+                $this->options[$k] = '';
+            }
 		}
 		
 		// Load up the localization file if we're using WordPress in a different language
