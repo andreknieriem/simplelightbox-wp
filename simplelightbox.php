@@ -1,16 +1,15 @@
 <?php
 /*
 Plugin Name: Simplelightbox
-Plugin URI: http://andreknieriem.de/simple-lightbox/
-Description: Touch-friendly image lightbox for mobile and desktop with jQuery for Wordpress
-Version: 1.6.0
+Plugin URI: https://simplelightbox.com
+Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
+Version: 2.0.0
 Author: Andre Rinas
-Author URI: http://andreknieriem.de
-Support URI: http://andreknieriem.de
-Thanks to: Andrej Cremoznik for refactoring code!
+Author URI: https://www.andrerinas.de
+Support URI: https://github.com/andreknieriem/simplelightbox-wp
 */
 /*
-Copyright 2015 Andre Rinas (info@andreknieriem.de)
+Copyright 2020 Andre Rinas (info@andrerinas.de)
 */
 class SimpleLightbox {
 
@@ -22,7 +21,6 @@ class SimpleLightbox {
 	//== Plugin initialization
 	private function __construct() {
 		$options = array(
-			'ar_sl_className'        => 'simple-lightbox',
 			'ar_sl_overlay'          => 1,
 			'ar_sl_spinner'          => 1,
 			'ar_sl_nav'              => 1,
@@ -33,20 +31,37 @@ class SimpleLightbox {
 			'ar_sl_captionType'      => 'attr',
 			'ar_sl_captionData'      => 'title',
 			'ar_sl_captionPosition'  => 'bottom',
+			'ar_sl_captionDelay'     => 0,
+			'ar_sl_captionClass'     => '',
 			'ar_sl_close'            => 1,
 			'ar_sl_closeText'        => '×',
-			'ar_sl_counter'          => 1,
+			'ar_sl_swipeClose'       => 1,
+			'ar_sl_showCounter'      => 1,
 			'ar_sl_fileExt'          => 'png|jpg|jpeg|gif',
 			'ar_sl_animationSpeed'   => 250,
+			'ar_sl_animationSlide'   => 1,
 			'ar_sl_preloading'       => 1,
 			'ar_sl_enableKeyboard'   => 1,
 			'ar_sl_loop'             => 1,
+			'ar_sl_rel'              => 'false',
 			'ar_sl_docClose'         => 1,
 			'ar_sl_swipeTolerance'   => '50',
+            'ar_sl_className'        => 'simple-lightbox',
 			'ar_sl_widthRatio'       => '0.8',
 			'ar_sl_heightRatio'      => '0.9',
+			'ar_sl_scaleImageToRatio'=> 0,
 			'ar_sl_disableRightClick'=> 0,
 			'ar_sl_disableScroll' 	 => 1,
+			'ar_sl_alertError' 	     => 1,
+			'ar_sl_alertErrorMessage'=> 'Image not found, next image will be loaded',
+			'ar_sl_additionalHtml' 	 => '',
+			'ar_sl_history' 	     => 1,
+			'ar_sl_throttleInterval' => 0,
+			'ar_sl_doubleTapZoom' 	 => 2,
+			'ar_sl_maxZoom' 	     => 10,
+			'ar_sl_htmlClass' 	     => 'has-lightbox',
+
+            /* Styling */
 			'ar_sl_overlayColor'     => '#ffffff',
 			'ar_sl_overlayOpacity'   => '0.7',
 			'ar_sl_btnColor'         => '#000000',
@@ -90,10 +105,10 @@ class SimpleLightbox {
 		$opt = 'simplelightbox-options';
 		$sec = 'simplelightbox-section';
 		$fields = array(
-			'ar_sl_className' => array(
+			'ar_sl_sourceAttr' => array(
 				'type'  => 'text',
-				'label' => __('Class Name', 'simplelightbox'),
-				'desc'  => __('adds a class to the wrapper of the lightbox', 'simplelightbox')
+				'label' => __('Source Attribute', 'simplelightbox'),
+				'desc'  => __('the attribute used for large images', 'simplelightbox')
 			),
 			'ar_sl_overlay' => array(
 				'type'  => 'checkbox',
@@ -144,6 +159,16 @@ class SimpleLightbox {
 				'desc' => __('The position of the caption. Options are top, bottom or outside (note that outside can be outside the visible viewport!)', 'simplelightbox'),
 				'options' => array('top' => __('Top', 'simplelightbox'), 'bottom' => __('Bottom', 'simplelightbox'), 'outside' => __('Outside', 'simplelightbox'))
 			),
+            'ar_sl_captionDelay' => array(
+                'type' => 'text',
+                'label' => __('Caption Delay', 'simplelightbox'),
+                'desc' => __('adds a delay before the caption shows (in ms)', 'simplelightbox')
+            ),
+            'ar_sl_captionClass' => array(
+                'type' => 'text',
+                'label' => __('Caption Class', 'simplelightbox'),
+                'desc' => __('adds an additional class to the sl-caption', 'simplelightbox')
+            ),
 			'ar_sl_close' => array(
 				'type'  => 'checkbox',
 				'label' => __('Show Close Button', 'simplelightbox'),
@@ -153,7 +178,12 @@ class SimpleLightbox {
 				'type'  => 'text',
 				'label' => __('Text/Html for Close Button', 'simplelightbox')
 			),
-			'ar_sl_counter' => array(
+			'ar_sl_swipeClose' => array(
+				'type'  => 'checkbox',
+				'label' => __('Swipe to close', 'simplelightbox'),
+				'desc'  => __('swipe up or down to close gallery', 'simplelightbox')
+			),
+			'ar_sl_showCounter' => array(
 				'type'  => 'checkbox',
 				'label' => __('Show Counter', 'simplelightbox'),
 				'desc'  => __('show current image index or not', 'simplelightbox')
@@ -166,6 +196,11 @@ class SimpleLightbox {
 			'ar_sl_animationSpeed' => array(
 				'type'  => 'text',
 				'label' => __('Animation-Speed', 'simplelightbox')
+			),
+			'ar_sl_animationSlide' => array(
+				'type'  => 'checkbox',
+				'label' => __('Slide Images', 'simplelightbox'),
+				'desc'  => __('weather to slide in new photos or not, disable to fade', 'simplelightbox')
 			),
 			'ar_sl_preloading' => array(
 				'type'  => 'checkbox',
@@ -182,6 +217,11 @@ class SimpleLightbox {
 				'label' => __('Enable Looping', 'simplelightbox'),
 				'desc'  => __('enables looping through images', 'simplelightbox')
 			),
+            'ar_sl_rel' => array(
+                'type'  => 'text',
+                'label' => __('Group Images', 'simplelightbox'),
+                'desc' => __('group images by rel attribute of link with same selector.', 'simplelightbox')
+            ),
 			'ar_sl_docClose' => array(
 				'type'  => 'checkbox',
 				'label' => __('Doc Close', 'simplelightbox'),
@@ -192,6 +232,11 @@ class SimpleLightbox {
 				'label' => __('Swipe-Tolerance', 'simplelightbox'),
 				'desc'  => __('how much pixel you have to swipe, until next or previous image', 'simplelightbox')
 			),
+            'ar_sl_className' => array(
+                'type'  => 'text',
+                'label' => __('Class Name', 'simplelightbox'),
+                'desc'  => __('adds a class to the wrapper of the lightbox', 'simplelightbox')
+            ),
 			'ar_sl_widthRatio' => array(
 				'type'  => 'text',
 				'label' => __('Width Ratio', 'simplelightbox'),
@@ -202,16 +247,62 @@ class SimpleLightbox {
 				'label' => __('Height Ratio', 'simplelightbox'),
 				'desc'  => __('Ratio of image height to screen height', 'simplelightbox')
 			),
-
-			'ar_sl_disableRightClick' => array(
+			'ar_sl_scaleImageToRatio' => array(
 				'type' => 'checkbox', 
-				'label' => __('Disable rightclick','simplelightbox'), 
+				'label' => __('Scales Images Up','simplelightbox'),
+				'desc' => __('scales the image up to the defined ratio size','simplelightbox')
+			),
+			'ar_sl_disableRightClick' => array(
+				'type' => 'checkbox',
+				'label' => __('Disable rightclick','simplelightbox'),
 				'desc' => __('disable rightclick on image or not','simplelightbox')
 			),
 			'ar_sl_disableScroll' => array(
 				'type' => 'checkbox', 
 				'label' => __('Disable scroll','simplelightbox'), 
-				'desc' => __('stop scrolling page if lightbox is opened','simplelightbox')),
+				'desc' => __('stop scrolling page if lightbox is opened','simplelightbox')
+            ),
+            'ar_sl_alertError' => array(
+                'type' => 'checkbox',
+                'label' => __('Alert Error','simplelightbox'),
+                'desc' => __('show an alert, if image was not found. If false error will be ignored','simplelightbox')
+            ),
+            'ar_sl_alertErrorMessage' => array(
+                'type'  => 'text',
+                'label' => __('Error Message', 'simplelightbox'),
+                'desc'  => __('the message displayed if image was not found', 'simplelightbox')
+            ),
+            'ar_sl_additionalHtml' => array(
+                'type'  => 'text',
+                'label' => __('Additional Html', 'simplelightbox'),
+                'desc'  => __('Additional HTML showing inside every image. Usefull for watermark etc. If false nothing is added', 'simplelightbox')
+            ),
+            'ar_sl_history' => array(
+                'type' => 'checkbox',
+                'label' => __('Close on browser back button','simplelightbox'),
+                'desc' => __('enable history back closes lightbox instead of reloading the page','simplelightbox')
+            ),
+            'ar_sl_throttleInterval' => array(
+                'type'  => 'text',
+                'label' => __('Throttle Interval', 'simplelightbox'),
+                'desc'  => __('time to wait between slides', 'simplelightbox')
+            ),
+            'ar_sl_doubleTapZoom' => array(
+                'type'  => 'text',
+                'label' => __('Double-tap zoom', 'simplelightbox'),
+                'desc'  => __('zoom level if double tapping on image', 'simplelightbox')
+            ),
+            'ar_sl_maxZoom' => array(
+                'type'  => 'text',
+                'label' => __('Max zoom', 'simplelightbox'),
+                'desc'  => __('maximum zoom level on pinching', 'simplelightbox')
+            ),
+            'ar_sl_htmlClass' => array(
+                'type'  => 'text',
+                'label' => __('HTML Class', 'simplelightbox'),
+                'desc'  => __('adds class to html element if lightbox is open. If empty or false no class is set', 'simplelightbox')
+            ),
+
 			'ar_sl_overlayColor' => array(
 				'section' => $sec,
 				'type'    => 'color',
@@ -342,7 +433,7 @@ class SimpleLightbox {
 		wp_enqueue_script('simplelightbox-call');
 
 		//== simplelightbox style
-		wp_enqueue_style('simplelightbox-css', plugins_url('/dist/simplelightbox.min.css', __FILE__));
+		wp_enqueue_style('simplelightbox-css', plugins_url('/dist/simple-lightbox.min.css', __FILE__));
 
 		add_filter('the_content', array($this, 'autoexpand_rel_wlightbox'), 99);
 		add_filter('the_excerpt', array($this, 'autoexpand_rel_wlightbox'), 99);

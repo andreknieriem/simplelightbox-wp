@@ -1,10 +1,10 @@
 === Simplelightbox ===
 Contributors: aknieriem
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JZQZMVV5BQ4YC
+Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 4.4.0
-Stable tag: 1.6.0
+Tested up to: 5.3.0
+Stable tag: 2.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.0.0 =
+* Added latest simplelightbox.js (2.0.0) with new options and a complete rewrite
+
 = 1.6.0 =
 * Added simplelightbox.js (1.6.0) with new options
 
