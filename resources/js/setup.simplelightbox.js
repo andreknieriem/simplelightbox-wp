@@ -41,6 +41,6 @@ jQuery(document).ready(function($) {
 	}
 
 	if($('a.simplelightbox ').length ) {
-		var simplelightbox = $("a.simplelightbox").simpleLightbox(options);
+		var simplelightbox = new SimpleLightbox('a.simplelightbox', options);
 	}
 });
