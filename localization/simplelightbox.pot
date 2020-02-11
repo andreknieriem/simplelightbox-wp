@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: simplelightbox\n"
-"POT-Creation-Date: 2015-02-11 08:46+0100\n"
+"POT-Creation-Date: 2020-02-11 12:01+0100\n"
 "PO-Revision-Date: 2015-02-11 08:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,264 +10,388 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../simplelightbox.php:95
-msgid "Class Name"
+#: ../simplelightbox.php:111
+msgid "Source Attribute"
 msgstr ""
 
-#: ../simplelightbox.php:96
-msgid "adds a class to the wrapper of the lightbox"
+#: ../simplelightbox.php:112
+msgid "the attribute used for large images"
 msgstr ""
 
-#: ../simplelightbox.php:100
+#: ../simplelightbox.php:116
 msgid "Show Overlay"
 msgstr ""
 
-#: ../simplelightbox.php:101
+#: ../simplelightbox.php:117
 msgid "show an overlay or not"
 msgstr ""
 
-#: ../simplelightbox.php:105
+#: ../simplelightbox.php:121
 msgid "Show Spinner"
 msgstr ""
 
-#: ../simplelightbox.php:106
+#: ../simplelightbox.php:122
 msgid "show spinner or not"
 msgstr ""
 
-#: ../simplelightbox.php:110
+#: ../simplelightbox.php:126
 msgid "Show Navigation"
 msgstr ""
 
-#: ../simplelightbox.php:111
+#: ../simplelightbox.php:127
 msgid "show arrow-navigation or not"
 msgstr ""
 
-#: ../simplelightbox.php:115
+#: ../simplelightbox.php:131
 msgid "Text/Html for Prev Button"
 msgstr ""
 
-#: ../simplelightbox.php:119
+#: ../simplelightbox.php:135
 msgid "Text/Html for Next Button"
 msgstr ""
 
-#: ../simplelightbox.php:123
+#: ../simplelightbox.php:139
 msgid "Show Captions"
 msgstr ""
 
-#: ../simplelightbox.php:124
+#: ../simplelightbox.php:140
 msgid "show captions if availabled or not"
 msgstr ""
 
-#: ../simplelightbox.php:128
+#: ../simplelightbox.php:144
 msgid "Caption-Selector"
 msgstr ""
 
-#: ../simplelightbox.php:129
+#: ../simplelightbox.php:145
 msgid ""
 "set the element where the caption is. Set it to \"self\" for the A-Tag itself"
 msgstr ""
 
-#: ../simplelightbox.php:133
+#: ../simplelightbox.php:149
 msgid "Caption-Type"
 msgstr ""
 
-#: ../simplelightbox.php:134
+#: ../simplelightbox.php:150
 msgid "how to get the caption. You can choose between attr, data or text"
 msgstr ""
 
-#: ../simplelightbox.php:138
+#: ../simplelightbox.php:154
 msgid "Caption Attribute"
 msgstr ""
 
-#: ../simplelightbox.php:139
+#: ../simplelightbox.php:155
 msgid "get the caption from given attribute"
 msgstr ""
 
-#: ../simplelightbox.php:143
+#: ../simplelightbox.php:159
 msgid "Caption Position"
 msgstr ""
 
-#: ../simplelightbox.php:144
+#: ../simplelightbox.php:160
 msgid ""
 "The position of the caption. Options are top, bottom or outside (note that "
 "outside can be outside the visible viewport!)"
 msgstr ""
 
-#: ../simplelightbox.php:145
+#: ../simplelightbox.php:161
 msgid "Top"
 msgstr ""
 
-#: ../simplelightbox.php:145
+#: ../simplelightbox.php:161
 msgid "Bottom"
 msgstr ""
 
-#: ../simplelightbox.php:145
+#: ../simplelightbox.php:161
 msgid "Outside"
 msgstr ""
 
-#: ../simplelightbox.php:149
+#: ../simplelightbox.php:165
+msgid "Caption Delay"
+msgstr ""
+
+#: ../simplelightbox.php:166
+msgid "adds a delay before the caption shows (in ms)"
+msgstr ""
+
+#: ../simplelightbox.php:170
+msgid "Caption Class"
+msgstr ""
+
+#: ../simplelightbox.php:171
+msgid "adds an additional class to the sl-caption"
+msgstr ""
+
+#: ../simplelightbox.php:175
 msgid "Show Close Button"
 msgstr ""
 
-#: ../simplelightbox.php:150
+#: ../simplelightbox.php:176
 msgid "show the close button or not"
 msgstr ""
 
-#: ../simplelightbox.php:154
+#: ../simplelightbox.php:180
 msgid "Text/Html for Close Button"
 msgstr ""
 
-#: ../simplelightbox.php:158
+#: ../simplelightbox.php:184
+msgid "Swipe to close"
+msgstr ""
+
+#: ../simplelightbox.php:185
+msgid "swipe up or down to close gallery"
+msgstr ""
+
+#: ../simplelightbox.php:189
 msgid "Show Counter"
 msgstr ""
 
-#: ../simplelightbox.php:159
+#: ../simplelightbox.php:190
 msgid "show current image index or not"
 msgstr ""
 
-#: ../simplelightbox.php:163
+#: ../simplelightbox.php:194
 msgid "File Extensions"
 msgstr ""
 
-#: ../simplelightbox.php:164
+#: ../simplelightbox.php:195
 msgid "list of fileextensions the plugin works with"
 msgstr ""
 
-#: ../simplelightbox.php:168
+#: ../simplelightbox.php:199
 msgid "Animation-Speed"
 msgstr ""
 
-#: ../simplelightbox.php:172
-msgid "Enable Preloading"
-msgstr ""
-
-#: ../simplelightbox.php:173
-msgid "allows preloading next und previous images"
-msgstr ""
-
-#: ../simplelightbox.php:177
-msgid "Enable Keyboard"
-msgstr ""
-
-#: ../simplelightbox.php:178
-msgid "allow keyboard arrow navigation and close with ESC key"
-msgstr ""
-
-#: ../simplelightbox.php:182
-msgid "Enable Looping"
-msgstr ""
-
-#: ../simplelightbox.php:183
-msgid "enables looping through images"
-msgstr ""
-
-#: ../simplelightbox.php:187
-msgid "Doc Close"
-msgstr ""
-
-#: ../simplelightbox.php:188
-msgid "closes the lightbox when clicking outside"
-msgstr ""
-
-#: ../simplelightbox.php:192
-msgid "Swipe-Tolerance"
-msgstr ""
-
-#: ../simplelightbox.php:193
-msgid "how much pixel you have to swipe, until next or previous image"
-msgstr ""
-
-#: ../simplelightbox.php:197
-msgid "Width Ratio"
-msgstr ""
-
-#: ../simplelightbox.php:198
-msgid "Ratio of image width to screen width"
-msgstr ""
-
-#: ../simplelightbox.php:202
-msgid "Height Ratio"
-msgstr ""
-
 #: ../simplelightbox.php:203
-msgid "Ratio of image height to screen height"
+msgid "Slide Images"
+msgstr ""
+
+#: ../simplelightbox.php:204
+msgid "weather to slide in new photos or not, disable to fade"
 msgstr ""
 
 #: ../simplelightbox.php:208
-msgid "Disable rightclick"
+msgid "Enable Preloading"
 msgstr ""
 
 #: ../simplelightbox.php:209
-msgid "disable rightclick on image or not"
+msgid "allows preloading next und previous images"
 msgstr ""
 
 #: ../simplelightbox.php:213
-msgid "Disable scroll"
+msgid "Enable Keyboard"
 msgstr ""
 
 #: ../simplelightbox.php:214
-msgid "stop scrolling page if lightbox is opened"
+msgid "allow keyboard arrow navigation and close with ESC key"
 msgstr ""
 
 #: ../simplelightbox.php:218
-msgid "Overlay Color"
+msgid "Enable Looping"
 msgstr ""
 
 #: ../simplelightbox.php:219
-msgid "Overlay Background-Color"
+msgid "enables looping through images"
+msgstr ""
+
+#: ../simplelightbox.php:223
+msgid "Group Images"
 msgstr ""
 
 #: ../simplelightbox.php:224
-msgid "Overlay Opacity"
+msgid "group images by rel attribute of link with same selector."
 msgstr ""
 
 #: ../simplelightbox.php:228
-msgid "Button Color"
+msgid "Doc Close"
 msgstr ""
 
 #: ../simplelightbox.php:229
-msgid "Navigation/Close Button Color"
+msgid "closes the lightbox when clicking outside"
 msgstr ""
 
 #: ../simplelightbox.php:233
-msgid "Loader Color"
+msgid "Swipe-Tolerance"
 msgstr ""
 
-#: ../simplelightbox.php:237
-msgid "Caption background-color"
+#: ../simplelightbox.php:234
+msgid "how much pixel you have to swipe, until next or previous image"
 msgstr ""
 
-#: ../simplelightbox.php:241
-msgid "Caption font-color"
+#: ../simplelightbox.php:238
+msgid "Class Name"
 msgstr ""
 
-#: ../simplelightbox.php:245
-msgid "Caption Opacity"
+#: ../simplelightbox.php:239
+msgid "adds a class to the wrapper of the lightbox"
+msgstr ""
+
+#: ../simplelightbox.php:243
+msgid "Width Ratio"
+msgstr ""
+
+#: ../simplelightbox.php:244
+msgid "Ratio of image width to screen width"
+msgstr ""
+
+#: ../simplelightbox.php:248
+msgid "Height Ratio"
 msgstr ""
 
 #: ../simplelightbox.php:249
-msgid "Minimal Z-Index"
-msgstr ""
-
-#: ../simplelightbox.php:250
-msgid "The minimum z-index for all lightbox elements."
+msgid "Ratio of image height to screen height"
 msgstr ""
 
 #: ../simplelightbox.php:253
-msgid "Section"
+msgid "Scales Images Up"
+msgstr ""
+
+#: ../simplelightbox.php:254
+msgid "scales the image up to the defined ratio size"
+msgstr ""
+
+#: ../simplelightbox.php:258
+msgid "Disable rightclick"
+msgstr ""
+
+#: ../simplelightbox.php:259
+msgid "disable rightclick on image or not"
+msgstr ""
+
+#: ../simplelightbox.php:263
+msgid "Disable scroll"
+msgstr ""
+
+#: ../simplelightbox.php:264
+msgid "stop scrolling page if lightbox is opened"
+msgstr ""
+
+#: ../simplelightbox.php:268
+msgid "Alert Error"
+msgstr ""
+
+#: ../simplelightbox.php:269
+msgid "show an alert, if image was not found. If false error will be ignored"
+msgstr ""
+
+#: ../simplelightbox.php:273
+msgid "Error Message"
+msgstr ""
+
+#: ../simplelightbox.php:274
+msgid "the message displayed if image was not found"
+msgstr ""
+
+#: ../simplelightbox.php:278
+msgid "Additional Html"
+msgstr ""
+
+#: ../simplelightbox.php:279
+msgid ""
+"Additional HTML showing inside every image. Usefull for watermark etc. If "
+"false nothing is added"
+msgstr ""
+
+#: ../simplelightbox.php:283
+msgid "Close on browser back button"
+msgstr ""
+
+#: ../simplelightbox.php:284
+msgid "enable history back closes lightbox instead of reloading the page"
+msgstr ""
+
+#: ../simplelightbox.php:288
+msgid "Throttle Interval"
+msgstr ""
+
+#: ../simplelightbox.php:289
+msgid "time to wait between slides"
+msgstr ""
+
+#: ../simplelightbox.php:293
+msgid "Double-tap zoom"
+msgstr ""
+
+#: ../simplelightbox.php:294
+msgid "zoom level if double tapping on image"
+msgstr ""
+
+#: ../simplelightbox.php:298
+msgid "Max zoom"
+msgstr ""
+
+#: ../simplelightbox.php:299
+msgid "maximum zoom level on pinching"
+msgstr ""
+
+#: ../simplelightbox.php:303
+msgid "HTML Class"
+msgstr ""
+
+#: ../simplelightbox.php:304
+msgid ""
+"adds class to html element if lightbox is open. If empty or false no class "
+"is set"
+msgstr ""
+
+#: ../simplelightbox.php:310
+msgid "Overlay Color"
+msgstr ""
+
+#: ../simplelightbox.php:311
+msgid "Overlay Background-Color"
+msgstr ""
+
+#: ../simplelightbox.php:316
+msgid "Overlay Opacity"
+msgstr ""
+
+#: ../simplelightbox.php:320
+msgid "Button Color"
 msgstr ""
 
 #: ../simplelightbox.php:321
+msgid "Navigation/Close Button Color"
+msgstr ""
+
+#: ../simplelightbox.php:325
+msgid "Loader Color"
+msgstr ""
+
+#: ../simplelightbox.php:329
+msgid "Caption background-color"
+msgstr ""
+
+#: ../simplelightbox.php:333
+msgid "Caption font-color"
+msgstr ""
+
+#: ../simplelightbox.php:337
+msgid "Caption Opacity"
+msgstr ""
+
+#: ../simplelightbox.php:341
+msgid "Minimal Z-Index"
+msgstr ""
+
+#: ../simplelightbox.php:342
+msgid "The minimum z-index for all lightbox elements."
+msgstr ""
+
+#: ../simplelightbox.php:345
+msgid "Section"
+msgstr ""
+
+#: ../simplelightbox.php:413
 msgid "Simplelightbox Settings"
 msgstr ""
 
-#: ../simplelightbox.php:363
+#: ../simplelightbox.php:455
 msgid "Settings"
 msgstr ""

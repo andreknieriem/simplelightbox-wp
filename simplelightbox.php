@@ -21,6 +21,7 @@ class SimpleLightbox {
 	//== Plugin initialization
 	private function __construct() {
 		$options = array(
+		    'ar_sl_sourceAttr '      => 'href',
 			'ar_sl_overlay'          => 1,
 			'ar_sl_spinner'          => 1,
 			'ar_sl_nav'              => 1,
