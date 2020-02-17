@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.0.0
+Version: 2.0.1
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -75,11 +75,13 @@ class SimpleLightbox {
 
 		// Set options or use defaults
 		foreach($options as $k => $v) {
-			$this->options[$k] = get_option($k) ? get_option($k) : $v;
+		    $option = get_option($k);
 
-			if(get_option($k) == ''){
-                $this->options[$k] = '';
+		    if($option === false) {
+                $option = $v;
             }
+
+			$this->options[$k] = $option;
 		}
 		
 		// Load up the localization file if we're using WordPress in a different language
