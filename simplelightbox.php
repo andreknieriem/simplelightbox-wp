@@ -7,6 +7,8 @@ Version: 2.1.5
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
+Text Domain: simplelightbox
+Domain Path: /localization
 */
 /*
 Copyright 2020 Andre Rinas (info@andrerinas.de)
