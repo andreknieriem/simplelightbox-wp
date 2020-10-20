@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.1.5
+Version: 2.4.1
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -63,6 +63,11 @@ class SimpleLightbox {
 			'ar_sl_doubleTapZoom' 	 => 2,
 			'ar_sl_maxZoom' 	     => 10,
 			'ar_sl_htmlClass' 	     => 'has-lightbox',
+			'ar_sl_rtl' 	         => 0,
+			'ar_sl_fixedClass' 	     => 'sl-fixed',
+
+            /* Legacy Version or not */
+            'ar_sl_useLegacy'       => 0,
 
             /* Styling */
 			'ar_sl_overlayColor'     => '#ffffff',
@@ -311,6 +316,21 @@ class SimpleLightbox {
                 'label' => __('HTML Class', 'simplelightbox'),
                 'desc'  => __('adds class to html element if lightbox is open. If empty or false no class is set', 'simplelightbox')
             ),
+            'ar_sl_rtl' => array(
+                'type' => 'checkbox',
+                'label' => __('Close on browser back button','simplelightbox'),
+                'desc' => __('enable history back closes lightbox instead of reloading the page','simplelightbox')
+            ),
+            'ar_sl_fixedClass' => array(
+                'type'  => 'text',
+                'label' => __('Fixed Class', 'simplelightbox'),
+                'desc'  => __('elements with this class are fixed and get the right padding when lightbox opens', 'simplelightbox')
+            ),
+            'ar_sl_useLegacy' => array(
+                'type' => 'checkbox',
+                'label' => __('Use Legacy Version','simplelightbox'),
+                'desc' => __('Used legacy version with IE support. (Has bigger filesize.)','simplelightbox')
+            ),
 
 			'ar_sl_overlayColor' => array(
 				'section' => $sec,
@@ -433,7 +453,10 @@ class SimpleLightbox {
 
 	//== load simplelightbox components
 	public function load() {
-		wp_enqueue_script('simplelightbox', plugins_url('/dist/simple-lightbox.min.js', __FILE__), array('jquery'), '1.6.0', true);
+
+        $file = get_option('ar_sl_useLegacy') == 0 ? '/dist/simple-lightbox.min.js' : '/dist/simple-lightbox.legacy.min.js';
+
+		wp_enqueue_script('simplelightbox', plugins_url($file, __FILE__), array('jquery'), '2.4.1', true);
 
 		//== simplelightbox JS hook
 		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array('jquery', 'simplelightbox'), '1.6.0', true);

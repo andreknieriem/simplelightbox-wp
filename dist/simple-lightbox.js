@@ -2,13 +2,20 @@
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.de
 	Available for use under the MIT License
-	Version 2.1.5
+	Version 2.4.1
 */
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function (global){(function (){
 "use strict";
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -66,7 +73,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
       doubleTapZoom: 2,
       maxZoom: 10,
       htmlClass: 'has-lightbox',
-      rtl: false
+      rtl: false,
+      fixedClass: 'sl-fixed'
     });
 
     _defineProperty(this, "transitionPrefix", void 0);
@@ -84,6 +92,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
     _defineProperty(this, "isAnimating", false);
 
     _defineProperty(this, "isClosing", false);
+
+    _defineProperty(this, "isFadeIn", false);
 
     _defineProperty(this, "urlChangedOnce", false);
 
@@ -311,6 +321,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
     key: "toggleScrollbar",
     value: function toggleScrollbar(type) {
       var scrollbarWidth = 0;
+      var fixedElements = [].slice.call(document.querySelectorAll('.' + this.options.fixedClass));
 
       if (type === 'hide') {
         var fullWindowWidth = window.innerWidth;
@@ -332,11 +343,24 @@ var SimpleLightbox = /*#__PURE__*/function () {
           if (scrollbarWidth > 0) {
             document.body.classList.add('hidden-scroll');
             document.body.style.paddingRight = paddingRight + scrollbarWidth + 'px';
+            fixedElements.forEach(function (element) {
+              var actualPadding = element.style.paddingRight;
+              var calculatedPadding = window.getComputedStyle(element)['padding-right'];
+              element.dataset.originalPaddingRight = actualPadding;
+              element.style.paddingRight = "".concat(parseFloat(calculatedPadding) + scrollbarWidth, "px");
+            });
           }
         }
       } else {
         document.body.classList.remove('hidden-scroll');
         document.body.style.paddingRight = document.body.dataset.originalPaddingRight;
+        fixedElements.forEach(function (element) {
+          var padding = element.dataset.originalPaddingRight;
+
+          if (typeof padding !== 'undefined') {
+            element.style.paddingRight = padding;
+          }
+        });
       }
 
       return scrollbarWidth;
@@ -888,7 +912,9 @@ var SimpleLightbox = /*#__PURE__*/function () {
             /* No touch */
             {
               /* Set attributes */
-              _this6.setZoomData(_this6.controlCoordinates.initialScale, _this6.controlCoordinates.targetOffsetX, _this6.controlCoordinates.targetOffsetY);
+              if (_this6.currentImage) {
+                _this6.setZoomData(_this6.controlCoordinates.initialScale, _this6.controlCoordinates.targetOffsetX, _this6.controlCoordinates.targetOffsetY);
+              }
 
               if (_this6.controlCoordinates.initialScale === 1) {
                 _this6.controlCoordinates.zoomed = false;
@@ -1258,6 +1284,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
         _iterator5.f();
       }
 
+      this.isFadeIn = false;
+
       var step = 16.66666 / (duration || 300),
           fade = function fade() {
         var currentOpacity = parseFloat(elements[0].style.opacity);
@@ -1322,6 +1350,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
         _iterator8.f();
       }
 
+      this.isFadeIn = true;
+
       var opacityTarget = parseFloat(elements[0].dataset.opacityTarget || 1),
           step = 16.66666 * opacityTarget / (duration || 300),
           fade = function fade() {
@@ -1342,6 +1372,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
             _iterator9.f();
           }
 
+          if (!_this10.isFadeIn) return;
           requestAnimationFrame(fade);
         } else {
           var _iterator10 = _createForOfIteratorHelper(elements),
@@ -1554,3 +1585,10 @@ var SimpleLightbox = /*#__PURE__*/function () {
 
   return SimpleLightbox;
 }();
+
+var _default = SimpleLightbox;
+exports["default"] = _default;
+global.SimpleLightbox = SimpleLightbox;
+
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}]},{},[1]);

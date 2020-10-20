@@ -37,7 +37,9 @@ jQuery(document).ready(function($) {
 		throttleInterval:parseInt(php_vars.ar_sl_throttleInterval,10),
 		doubleTapZoom:	parseInt(php_vars.ar_sl_doubleTapZoom,10),
 		maxZoom:		parseInt(php_vars.ar_sl_maxZoom,10),
-		htmlClass:		php_vars.ar_sl_htmlClass
+		htmlClass:		php_vars.ar_sl_htmlClass,
+		rtl:			(php_vars.ar_sl_rtl == '1') ? true : false,
+		fixedClass:		php_vars.ar_sl_fixedClass
 	}
 
 	if($('a.simplelightbox ').length ) {

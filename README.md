@@ -55,3 +55,5 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | doubleTapZoom | 2 | int | zoom level if double tapping on image |
 | maxZoom | 10 | int | maximum zoom level on pinching |
 | htmlClass | 'has-lightbox' | string or false | adds class to html element if lightbox is open. If empty or false no class is set |
+| rtl | false | bool | change direction to rigth-to-left |
+| fixedClass | 'sl-fixed' | string | elements with this class are fixed and get the right padding when lightbox opens |
