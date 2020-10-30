@@ -2,7 +2,7 @@
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.de
 	Available for use under the MIT License
-	Version 2.4.1
+	Version 2.6.0
 */
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){(function (){
@@ -74,7 +74,10 @@ var SimpleLightbox = /*#__PURE__*/function () {
       maxZoom: 10,
       htmlClass: 'has-lightbox',
       rtl: false,
-      fixedClass: 'sl-fixed'
+      fixedClass: 'sl-fixed',
+      fadeSpeed: 300,
+      uniqueImages: true,
+      focus: true
     });
 
     _defineProperty(this, "transitionPrefix", void 0);
@@ -180,6 +183,20 @@ var SimpleLightbox = /*#__PURE__*/function () {
       this.elements = this.getRelated(this.options.rel);
     }
 
+    if (this.options.uniqueImages) {
+      var imgArr = [];
+      this.elements = Array.from(this.elements).filter(function (element) {
+        var src = element.getAttribute(_this.options.sourceAttr);
+
+        if (imgArr.indexOf(src) === -1) {
+          imgArr.push(src);
+          return true;
+        }
+
+        return false;
+      });
+    }
+
     this.createDomNodes();
 
     if (this.options.close) {
@@ -209,8 +226,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
     }); // close addEventListener click addEventListener doc
 
     if (this.options.docClose) {
-      this.addEventListener(this.domNodes.overlay, ['click.' + this.eventNamespace, 'touchstart.' + this.eventNamespace], function (event) {
-        if (_this.isOpen) {
+      this.addEventListener(this.domNodes.wrapper, ['click.' + this.eventNamespace, 'touchstart.' + this.eventNamespace], function (event) {
+        if (_this.isOpen && event.target === event.currentTarget) {
           _this.close();
         }
       });
@@ -283,6 +300,9 @@ var SimpleLightbox = /*#__PURE__*/function () {
       this.domNodes.image.classList.add('sl-image');
       this.domNodes.wrapper = document.createElement('div');
       this.domNodes.wrapper.classList.add('sl-wrapper');
+      this.domNodes.wrapper.setAttribute('tabindex', -1);
+      this.domNodes.wrapper.setAttribute('role', 'dialog');
+      this.domNodes.wrapper.setAttribute('aria-hidden', false);
 
       if (this.options.className) {
         this.domNodes.wrapper.classList.add(this.options.className);
@@ -386,7 +406,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
         }
       }
 
-      this.fadeOut(document.querySelectorAll('.sl-image img, .sl-overlay, .sl-close, .sl-navigation, .sl-image .sl-caption, .sl-counter'), 300, function () {
+      this.removeEventListener(document, 'focusin.' + this.eventNamespace);
+      this.fadeOut(document.querySelectorAll('.sl-image img, .sl-overlay, .sl-close, .sl-navigation, .sl-image .sl-caption, .sl-counter'), this.options.fadeSpeed, function () {
         if (_this2.options.disableScroll) {
           _this2.toggleScrollbar('show');
         }
@@ -474,25 +495,30 @@ var SimpleLightbox = /*#__PURE__*/function () {
         this.slide(this.options.animationSpeed / 1000, -100 * slideDirection - this.controlCoordinates.swipeDiff + 'px');
       }
 
-      this.fadeOut(this.domNodes.image, 300, function () {
+      this.fadeOut(this.domNodes.image, this.options.fadeSpeed, function () {
         _this4.isAnimating = true;
-        setTimeout(function () {
-          var element = _this4.relatedElements[_this4.currentImageIndex];
 
-          _this4.currentImage.setAttribute('src', element.getAttribute(_this4.options.sourceAttr));
+        if (!_this4.isClosing) {
+          setTimeout(function () {
+            var element = _this4.relatedElements[_this4.currentImageIndex];
 
-          if (_this4.loadedImages.indexOf(element.getAttribute(_this4.options.sourceAttr)) === -1) {
-            _this4.show(_this4.domNodes.spinner);
-          }
+            _this4.currentImage.setAttribute('src', element.getAttribute(_this4.options.sourceAttr));
 
-          if (_this4.domNodes.image.contains(_this4.domNodes.caption)) {
-            _this4.domNodes.image.removeChild(_this4.domNodes.caption);
-          }
+            if (_this4.loadedImages.indexOf(element.getAttribute(_this4.options.sourceAttr)) === -1) {
+              _this4.show(_this4.domNodes.spinner);
+            }
 
-          _this4.adjustImage(slideDirection);
+            if (_this4.domNodes.image.contains(_this4.domNodes.caption)) {
+              _this4.domNodes.image.removeChild(_this4.domNodes.caption);
+            }
 
-          if (_this4.options.preloading) _this4.preload();
-        }, 100);
+            _this4.adjustImage(slideDirection);
+
+            if (_this4.options.preloading) _this4.preload();
+          }, 100);
+        } else {
+          _this4.isAnimating = false;
+        }
       });
     }
   }, {
@@ -561,7 +587,15 @@ var SimpleLightbox = /*#__PURE__*/function () {
         _this5.domNodes.image.style.height = imageHeight + 'px';
         _this5.domNodes.spinner.style.display = 'none';
 
-        _this5.fadeIn(_this5.currentImage, 300);
+        if (_this5.options.focus) {
+          _this5.forceFocus();
+        }
+
+        _this5.fadeIn(_this5.currentImage, _this5.options.fadeSpeed, function () {
+          if (_this5.options.focus) {
+            _this5.domNodes.wrapper.focus();
+          }
+        });
 
         _this5.isOpen = true;
         var captionContainer = _this5.options.captionSelector === 'self' ? _this5.relatedElements[_this5.currentImageIndex] : _this5.relatedElements[_this5.currentImageIndex].querySelector(_this5.options.captionSelector),
@@ -610,7 +644,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
             }, 50);
           }
 
-          _this5.fadeIn(_this5.domNodes.image, 300, function () {
+          _this5.fadeIn(_this5.domNodes.image, _this5.options.fadeSpeed, function () {
             _this5.isAnimating = false;
 
             _this5.setCaption(captionText, imageWidth);
@@ -738,7 +772,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
                   _this6.zoomPanElement(0 + "px", 0 + "px", _this6.controlCoordinates.initialScale);
 
                   if (!_this6.domNodes.caption.style.opacity && _this6.domNodes.caption.style.display !== 'none') {
-                    _this6.fadeOut(_this6.domNodes.caption, 200);
+                    _this6.fadeOut(_this6.domNodes.caption, _this6.options.fadeSpeed);
                   }
 
                   _this6.controlCoordinates.zoomed = true;
@@ -833,7 +867,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
                   _this6.controlCoordinates.zoomed = true;
 
                   if (!_this6.domNodes.caption.style.opacity && _this6.domNodes.caption.style.display !== 'none') {
-                    _this6.fadeOut(_this6.domNodes.caption, 200);
+                    _this6.fadeOut(_this6.domNodes.caption, _this6.options.fadeSpeed);
                   }
                 }
 
@@ -920,7 +954,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
                 _this6.controlCoordinates.zoomed = false;
 
                 if (_this6.domNodes.caption.style.display === 'none') {
-                  _this6.fadeIn(_this6.domNodes.caption, 200);
+                  _this6.fadeIn(_this6.domNodes.caption, _this6.options.fadeSpeed);
                 }
               }
 
@@ -984,7 +1018,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
           _this6.zoomPanElement(0 + "px", 0 + "px", _this6.controlCoordinates.initialScale);
 
           if (!_this6.domNodes.caption.style.opacity && _this6.domNodes.caption.style.display !== 'none') {
-            _this6.fadeOut(_this6.domNodes.caption, 200);
+            _this6.fadeOut(_this6.domNodes.caption, _this6.options.fadeSpeed);
           }
 
           _this6.controlCoordinates.zoomed = true;
@@ -998,7 +1032,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
           _this6.controlCoordinates.zoomed = false;
 
           if (_this6.domNodes.caption.style.display === 'none') {
-            _this6.fadeIn(_this6.domNodes.caption, 200);
+            _this6.fadeIn(_this6.domNodes.caption, _this6.options.fadeSpeed);
           }
         }
 
@@ -1095,7 +1129,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
         this.domNodes.caption.innerHTML = captionText;
         this.domNodes.image.appendChild(this.domNodes.caption);
         setTimeout(function () {
-          _this7.fadeIn(_this7.domNodes.caption, 300);
+          _this7.fadeIn(_this7.domNodes.caption, _this7.options.fadeSpeed);
         }, this.options.captionDelay);
       }
     }
@@ -1173,8 +1207,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
       this.domNodes.image.innerHTML = '';
       this.domNodes.image.setAttribute('style', '');
       this.domNodes.image.appendChild(this.currentImage);
-      this.fadeIn(this.domNodes.overlay, 300);
-      this.fadeIn([this.domNodes.counter, this.domNodes.navigation, this.domNodes.closeButton], 300);
+      this.fadeIn(this.domNodes.overlay, this.options.fadeSpeed);
+      this.fadeIn([this.domNodes.counter, this.domNodes.navigation, this.domNodes.closeButton], this.options.fadeSpeed);
       this.show(this.domNodes.spinner);
       this.domNodes.counter.querySelector('.sl-current').innerHTML = this.currentImageIndex + 1;
       this.domNodes.counter.querySelector('.sl-total').innerHTML = this.relatedElements.length;
@@ -1187,6 +1221,18 @@ var SimpleLightbox = /*#__PURE__*/function () {
       setTimeout(function () {
         element.dispatchEvent(new Event('shown.' + _this8.eventNamespace));
       }, this.options.animationSpeed);
+    }
+  }, {
+    key: "forceFocus",
+    value: function forceFocus() {
+      var _this9 = this;
+
+      this.removeEventListener(document, 'focusin.' + this.eventNamespace);
+      this.addEventListener(document, 'focusin.' + this.eventNamespace, function (event) {
+        if (document !== event.target && _this9.domNodes.wrapper !== event.target && !_this9.domNodes.wrapper.contains(event.target)) {
+          _this9.domNodes.wrapper.focus();
+        }
+      });
     } // utility
 
   }, {
@@ -1248,8 +1294,11 @@ var SimpleLightbox = /*#__PURE__*/function () {
           try {
             for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
               var event = _step4.value;
-              element.removeEventListener(event.split('.')[0], element.namespaces[event]);
-              delete element.namespaces[event];
+
+              if (element.namespaces && element.namespaces[event]) {
+                element.removeEventListener(event.split('.')[0], element.namespaces[event]);
+                delete element.namespaces[event];
+              }
             }
           } catch (err) {
             _iterator4.e(err);
@@ -1266,7 +1315,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
   }, {
     key: "fadeOut",
     value: function fadeOut(elements, duration, callback) {
-      var _this9 = this;
+      var _this10 = this;
 
       elements = this.wrap(elements);
 
@@ -1286,7 +1335,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
 
       this.isFadeIn = false;
 
-      var step = 16.66666 / (duration || 300),
+      var step = 16.66666 / (duration || this.options.fadeSpeed),
           fade = function fade() {
         var currentOpacity = parseFloat(elements[0].style.opacity);
 
@@ -1306,7 +1355,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
             _iterator6.f();
           }
 
-          callback && callback.call(_this9, elements);
+          callback && callback.call(_this10, elements);
         } else {
           var _iterator7 = _createForOfIteratorHelper(elements),
               _step7;
@@ -1331,7 +1380,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
   }, {
     key: "fadeIn",
     value: function fadeIn(elements, duration, callback, display) {
-      var _this10 = this;
+      var _this11 = this;
 
       elements = this.wrap(elements);
 
@@ -1353,7 +1402,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
       this.isFadeIn = true;
 
       var opacityTarget = parseFloat(elements[0].dataset.opacityTarget || 1),
-          step = 16.66666 * opacityTarget / (duration || 300),
+          step = 16.66666 * opacityTarget / (duration || this.options.fadeSpeed),
           fade = function fade() {
         var currentOpacity = parseFloat(elements[0].style.opacity);
 
@@ -1372,7 +1421,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
             _iterator9.f();
           }
 
-          if (!_this10.isFadeIn) return;
+          if (!_this11.isFadeIn) return;
           requestAnimationFrame(fade);
         } else {
           var _iterator10 = _createForOfIteratorHelper(elements),
@@ -1389,7 +1438,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
             _iterator10.f();
           }
 
-          callback && callback.call(_this10, elements);
+          callback && callback.call(_this11, elements);
         }
       };
 
@@ -1548,6 +1597,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
       //remove all custom event listeners from elements
       this.off(['close.' + this.eventNamespace, 'closed.' + this.eventNamespace, 'nextImageLoaded.' + this.eventNamespace, 'prevImageLoaded.' + this.eventNamespace, 'change.' + this.eventNamespace, 'nextDone.' + this.eventNamespace, 'prevDone.' + this.eventNamespace, 'error.' + this.eventNamespace, 'changed.' + this.eventNamespace, 'next.' + this.eventNamespace, 'prev.' + this.eventNamespace, 'show.' + this.eventNamespace, 'shown.' + this.eventNamespace]);
       this.removeEventListener(this.elements, 'click.' + this.eventNamespace);
+      this.removeEventListener(document, 'focusin.' + this.eventNamespace);
       this.removeEventListener(document.body, 'contextmenu.' + this.eventNamespace);
       this.removeEventListener(document.body, 'keyup.' + this.eventNamespace);
       this.removeEventListener(this.domNodes.navigation.getElementsByTagName('button'), 'click.' + this.eventNamespace);

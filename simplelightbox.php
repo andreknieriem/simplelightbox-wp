@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.4.1
+Version: 2.6.0
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -65,6 +65,9 @@ class SimpleLightbox {
 			'ar_sl_htmlClass' 	     => 'has-lightbox',
 			'ar_sl_rtl' 	         => 0,
 			'ar_sl_fixedClass' 	     => 'sl-fixed',
+			'ar_sl_fadeSpeed' 	     => 300,
+			'ar_sl_uniqueImages' 	 => 1,
+			'ar_sl_focus' 	         => 1,
 
             /* Legacy Version or not */
             'ar_sl_useLegacy'       => 0,
@@ -325,6 +328,21 @@ class SimpleLightbox {
                 'type'  => 'text',
                 'label' => __('Fixed Class', 'simplelightbox'),
                 'desc'  => __('elements with this class are fixed and get the right padding when lightbox opens', 'simplelightbox')
+            ),
+            'ar_sl_fadeSpeed' => array(
+                'type'  => 'text',
+                'label' => __('Fade Speed', 'simplelightbox'),
+                'desc'  => __('the duration for fading in and out in milliseconds. Used for caption fadein/out too. If smaller than 100 it should be used with animationSlide:false', 'simplelightbox')
+            ),
+            'ar_sl_uniqueImages' => array(
+                'type'  => 'checkbox',
+                'label' => __('Unique Images', 'simplelightbox'),
+                'desc'  => __('whether to uniqualize images or not', 'simplelightbox')
+            ),
+            'ar_sl_focus' => array(
+                'type'  => 'checkbox',
+                'label' => __('Fixed Class', 'simplelightbox'),
+                'desc'  => __('focus the lightbox on open to enable tab control', 'simplelightbox')
             ),
             'ar_sl_useLegacy' => array(
                 'type' => 'checkbox',

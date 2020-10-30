@@ -39,7 +39,10 @@ jQuery(document).ready(function($) {
 		maxZoom:		parseInt(php_vars.ar_sl_maxZoom,10),
 		htmlClass:		php_vars.ar_sl_htmlClass,
 		rtl:			(php_vars.ar_sl_rtl == '1') ? true : false,
-		fixedClass:		php_vars.ar_sl_fixedClass
+		fixedClass:		php_vars.ar_sl_fixedClass,
+		fadeSpeed:		parseInt(php_vars.ar_sl_fadeSpeed,10),
+		uniqueImages:	(php_vars.ar_sl_uniqueImages == '1') ? true : false,
+		focus:			(php_vars.ar_sl_focus == '1') ? true : false,
 	}
 
 	if($('a.simplelightbox ').length ) {

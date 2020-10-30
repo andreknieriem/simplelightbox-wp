@@ -57,3 +57,6 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | htmlClass | 'has-lightbox' | string or false | adds class to html element if lightbox is open. If empty or false no class is set |
 | rtl | false | bool | change direction to rigth-to-left |
 | fixedClass | 'sl-fixed' | string | elements with this class are fixed and get the right padding when lightbox opens |
+| fadeSpeed | 300 | int | the duration for fading in and out in milliseconds. Used for caption fadein/out too. If smaller than 100 it should be used with animationSlide:false |
+| uniqueImages | true | bool | whether to uniqualize images or not |
+| focus | true | bool | focus the lightbox on open to enable tab control |
