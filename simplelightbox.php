@@ -518,11 +518,11 @@ class SimpleLightbox {
 	//== overwrite css file on save
 	public function output_css() {
 		echo '<style>
-.sl-overlay{background:'.$this->options['ar_sl_overlayColor'].';opacity: '.$this->options['ar_sl_overlayOpacity'].';z-index: '.($this->options['ar_sl_zindex'] + 6).';}
-.sl-wrapper .sl-navigation button,.sl-wrapper .sl-close,.sl-wrapper .sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 15).';}
-.sl-wrapper .sl-image{z-index:'.($this->options['ar_sl_zindex'] + 8000).';}
+.sl-overlay{background:'.$this->options['ar_sl_overlayColor'].';opacity: '.$this->options['ar_sl_overlayOpacity'].';z-index: '.($this->options['ar_sl_zindex'] + 35).';}
+.sl-wrapper .sl-navigation button,.sl-wrapper .sl-close,.sl-wrapper .sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 9060).';}
+.sl-wrapper .sl-image{z-index:'.($this->options['ar_sl_zindex'] + 9000).';}
 .sl-spinner{border-color:'.$this->options['ar_sl_loaderColor'].';z-index:'.($this->options['ar_sl_zindex'] + 7).';}
-.sl-wrapper{z-index:'.$this->options['ar_sl_zindex'].';}
+.sl-wrapper{z-index:'.$this->options['ar_sl_zindex'] +40 .';}
 .sl-wrapper .sl-image .sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
 </style>';
 	}

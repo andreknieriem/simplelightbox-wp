@@ -45,7 +45,7 @@ jQuery(document).ready(function($) {
 		focus:			(php_vars.ar_sl_focus == '1') ? true : false,
 	}
 
-	if($('a.simplelightbox ').length ) {
+	if($('a.simplelightbox').length ) {
 		var simplelightbox = new SimpleLightbox('a.simplelightbox', options);
 	}
 });
