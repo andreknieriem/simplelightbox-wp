@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.6.0
+Version: 2.6.2
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -522,7 +522,7 @@ class SimpleLightbox {
 .sl-wrapper .sl-navigation button,.sl-wrapper .sl-close,.sl-wrapper .sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 9060).';}
 .sl-wrapper .sl-image{z-index:'.($this->options['ar_sl_zindex'] + 9000).';}
 .sl-spinner{border-color:'.$this->options['ar_sl_loaderColor'].';z-index:'.($this->options['ar_sl_zindex'] + 7).';}
-.sl-wrapper{z-index:'.$this->options['ar_sl_zindex'] +40 .';}
+.sl-wrapper{z-index:'.($this->options['ar_sl_zindex'] +40) .';}
 .sl-wrapper .sl-image .sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
 </style>';
 	}
