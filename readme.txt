@@ -3,8 +3,8 @@ Contributors: aknieriem
 Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 5.5.1
-Stable tag: 2.6.2
+Tested up to: 5.6.0
+Stable tag: 2.7.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.7.0 =
+* Added latest simplelightbox.js (2.7.0) and an option for additional html selectors.
+
 = 2.6.2 =
 * Bugfixing css output
 

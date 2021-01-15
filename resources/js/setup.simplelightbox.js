@@ -45,7 +45,18 @@ jQuery(document).ready(function($) {
 		focus:			(php_vars.ar_sl_focus == '1') ? true : false,
 	}
 
+
 	if($('a.simplelightbox').length ) {
 		var simplelightbox = new SimpleLightbox('a.simplelightbox', options);
+	}
+
+	if(php_vars.ar_sl_additionalSelectors) {
+		var selectors = php_vars.ar_sl_additionalSelectors.split(',');
+		selectors.each(function(i,selector) {
+			selector = selector.trim();
+			if(selector != '' && $(selector).length) {
+				new SimpleLightbox(selector, options);
+			}
+		});
 	}
 });

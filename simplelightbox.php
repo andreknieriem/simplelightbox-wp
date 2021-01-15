@@ -72,6 +72,8 @@ class SimpleLightbox {
             /* Legacy Version or not */
             'ar_sl_useLegacy'       => 0,
 
+            'ar_sl_additionalSelectors' => '',
+
             /* Styling */
 			'ar_sl_overlayColor'     => '#ffffff',
 			'ar_sl_overlayOpacity'   => '0.7',
@@ -350,6 +352,12 @@ class SimpleLightbox {
                 'desc' => __('Used legacy version with IE support. (Has bigger filesize.)','simplelightbox')
             ),
 
+			'ar_sl_additionalSelectors' => array(
+			  'type' => 'textarea',
+              'label' => __('Additional Selectors', 'simplelightbox'),
+              'desc'  => __('Additional HTML Selectors for launching the lightbox. Comma seperated', 'simplelightbox')
+            ),
+
 			'ar_sl_overlayColor' => array(
 				'section' => $sec,
 				'type'    => 'color',
@@ -417,7 +425,11 @@ class SimpleLightbox {
 			case 'text':
 			echo '<input type="text" name="'.$opt['slug'].'" class="regular-text" id="'.$opt['slug'].'" value="'.$this->options[$opt['slug']].'">';
 			break;
-			
+
+			case 'textarea':
+			echo '<textarea name="'.$opt['slug'].'" class="regular-textarea" id="'.$opt['slug'].'">'.$this->options[$opt['slug']].'</textarea>';
+			break;
+
 			case 'select':
 			echo '<select name="'.$opt['slug'].'" id="'.$opt['slug'].'">';
 				foreach($opt['options'] as $v=>$option){
