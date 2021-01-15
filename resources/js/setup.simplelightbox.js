@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
 
 	if(php_vars.ar_sl_additionalSelectors) {
 		var selectors = php_vars.ar_sl_additionalSelectors.split(',');
-		selectors.each(function(i,selector) {
+		$.each(selectors, function(i,selector) {
 			selector = selector.trim();
 			if(selector != '' && $(selector).length) {
 				new SimpleLightbox(selector, options);
