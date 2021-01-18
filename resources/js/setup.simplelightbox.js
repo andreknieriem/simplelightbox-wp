@@ -54,9 +54,11 @@
 		var selectors = php_vars.ar_sl_additionalSelectors.split(',');
 		for(var i = 0; i <= selectors.length; i++) {
 			var selector = selectors[i];
-			selector = selector.trim();
-			if(selector != '' && document.querySelectorAll(selector).length) {
-				new SimpleLightbox(selector, options);
+			if(selector) {
+				selector = selector.trim();
+				if(selector != '' && document.querySelectorAll(selector).length) {
+					new SimpleLightbox(selector, options);
+				}
 			}
 		}
 	}
