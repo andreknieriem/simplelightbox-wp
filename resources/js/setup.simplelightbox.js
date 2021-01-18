@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+(function() {
 	var options = {
 		sourceAttr: 	php_vars.ar_sl_sourceAttr,
 		overlay: 		(php_vars.ar_sl_overlay == '1') ? true : false,
@@ -46,17 +46,18 @@ jQuery(document).ready(function($) {
 	}
 
 
-	if($('a.simplelightbox').length ) {
+	if(document.querySelectorAll('a.simplelightbox').length ) {
 		var simplelightbox = new SimpleLightbox('a.simplelightbox', options);
 	}
 
 	if(php_vars.ar_sl_additionalSelectors) {
 		var selectors = php_vars.ar_sl_additionalSelectors.split(',');
-		$.each(selectors, function(i,selector) {
+		for(var i = 0; i <= selectors.length; i++) {
+			var selector = selectors[i];
 			selector = selector.trim();
-			if(selector != '' && $(selector).length) {
+			if(selector != '' && document.querySelectorAll(selector).length) {
 				new SimpleLightbox(selector, options);
 			}
-		});
+		}
 	}
-});
+})();
