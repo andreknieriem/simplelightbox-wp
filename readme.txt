@@ -3,12 +3,12 @@ Contributors: aknieriem
 Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 5.7.1
-Stable tag: 2.7.3
+Tested up to: 5.7.2
+Stable tag: 2.8.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Touch-friendly image lightbox for mobile and desktop with jQuery
+Touch-friendly image lightbox for mobile and desktop without requiring jQuery
 
 == Description ==
 
@@ -43,6 +43,12 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.8.0 =
+* Added latest simplelightbox.js (2.8.0) with some tweaks and passive event listeners
+
+= 2.7.3 =
+* Added latest simplelightbox.js (2.7.3)
+
 = 2.7.2 =
 * Fixed #232 - sourceAttr does not work. Thanks to @bivisual for the issue
 
