@@ -43,6 +43,8 @@
 		fadeSpeed:		parseInt(php_vars.ar_sl_fadeSpeed,10),
 		uniqueImages:	(php_vars.ar_sl_uniqueImages == '1') ? true : false,
 		focus:			(php_vars.ar_sl_focus == '1') ? true : false,
+		scrollZoom:		(php_vars.ar_sl_scrollZoom == '1') ? true : false,
+		scrollZoomFactor:(php_vars.ar_sl_focus == '1') ? true : false
 	}
 
 

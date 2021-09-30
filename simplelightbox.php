@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.8.0
+Version: 2.9.0
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -11,7 +11,7 @@ Text Domain: simplelightbox
 Domain Path: /localization
 */
 /*
-Copyright 2020 Andre Rinas (info@andrerinas.de)
+Copyright 2021 Andre Rinas (info@andrerinas.de)
 */
 class SimpleLightbox {
 
@@ -68,6 +68,8 @@ class SimpleLightbox {
 			'ar_sl_fadeSpeed' 	     => 300,
 			'ar_sl_uniqueImages' 	 => 1,
 			'ar_sl_focus' 	         => 1,
+            'ar_sl_scrollZoom'       => 1,
+            'ar_sl_scrollZoomFactor' => 0.5,
 
             /* Legacy Version or not */
             'ar_sl_useLegacy'       => 0,
@@ -346,6 +348,16 @@ class SimpleLightbox {
                 'label' => __('Fixed Class', 'simplelightbox'),
                 'desc'  => __('focus the lightbox on open to enable tab control', 'simplelightbox')
             ),
+            'ar_sl_scrollZoom' => array(
+                'type'  => 'checkbox',
+                'label' => __('Mousewheel zooming', 'simplelightbox'),
+                'desc'  => __('Can zoom image with mousewheel scrolling', 'simplelightbox')
+            ),
+            'ar_sl_scrollZoomFactor' => array(
+                'type'  => 'text',
+                'label' => __('Zoom Factor', 'simplelightbox'),
+                'desc'  => __('How much zoom when scrolling via mousewheel', 'simplelightbox')
+            ),
             'ar_sl_useLegacy' => array(
                 'type' => 'checkbox',
                 'label' => __('Use Legacy Version','simplelightbox'),
@@ -486,10 +498,10 @@ class SimpleLightbox {
 
         $file = get_option('ar_sl_useLegacy') == 0 ? '/dist/simple-lightbox.min.js' : '/dist/simple-lightbox.legacy.min.js';
 
-		wp_enqueue_script('simplelightbox', plugins_url($file, __FILE__), array(), '2.8.0', true);
+		wp_enqueue_script('simplelightbox', plugins_url($file, __FILE__), array(), '2.9.0', true);
 
 		//== simplelightbox JS hook
-		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array(), '2.8.0', true);
+		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array(), '2.9.0', true);
 		//== simplelghtbox options
 		wp_localize_script('simplelightbox-call', 'php_vars', $this->options);
 		wp_enqueue_script('simplelightbox-call');
@@ -507,8 +519,8 @@ class SimpleLightbox {
 		wp_enqueue_style('simplelightbox-admin-css', plugins_url('/resources/css/ar-sl-admin.css', __FILE__));
 
 		//== js
-		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '2.8.0', true);
-		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '2.8.0', true);
+		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '2.9.0', true);
+		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '2.9.0', true);
 	}
 
 	//== add settings link on plugin page

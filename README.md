@@ -60,3 +60,5 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | fadeSpeed | 300 | int | the duration for fading in and out in milliseconds. Used for caption fadein/out too. If smaller than 100 it should be used with animationSlide:false |
 | uniqueImages | true | bool | whether to uniqualize images or not |
 | focus | true | bool | focus the lightbox on open to enable tab control |
+| scrollZoom | true | bool | Can zoom image with mousewheel scrolling |
+| scrollZoomFactor | true | bool | How much zoom when scrolling via mousewheel |

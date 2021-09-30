@@ -2,7 +2,7 @@
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.de
 	Available for use under the MIT License
-	Version 2.8.0
+	Version 2.9.0
 */
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports = function (it) {
@@ -4104,7 +4104,9 @@ var SimpleLightbox = /*#__PURE__*/function () {
       fixedClass: 'sl-fixed',
       fadeSpeed: 300,
       uniqueImages: true,
-      focus: true
+      focus: true,
+      scrollZoom: true,
+      scrollZoomFactor: 0.5
     });
 
     _defineProperty(this, "transitionPrefix", void 0);
@@ -4114,6 +4116,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
     _defineProperty(this, "transitionCapable", false);
 
     _defineProperty(this, "isTouchDevice", 'ontouchstart' in window);
+
+    _defineProperty(this, "isAppleDevice", /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform));
 
     _defineProperty(this, "initialLocationHash", void 0);
 
@@ -4400,7 +4404,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
           fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
         }
 
-        if (document.body.clientWidth < fullWindowWidth) {
+        if (document.body.clientWidth < fullWindowWidth || this.isAppleDevice) {
           var scrollDiv = document.createElement('div'),
               paddingRight = parseInt(document.body.style.paddingRight || 0, 10);
           scrollDiv.classList.add('sl-scrollbar-measure');
@@ -4409,7 +4413,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
           document.body.removeChild(scrollDiv);
           document.body.dataset.originalPaddingRight = paddingRight;
 
-          if (scrollbarWidth > 0) {
+          if (scrollbarWidth > 0 || scrollbarWidth == 0 && this.isAppleDevice) {
             document.body.classList.add('hidden-scroll');
             document.body.style.paddingRight = paddingRight + scrollbarWidth + 'px';
             fixedElements.forEach(function (element) {
@@ -4596,7 +4600,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
         _this5.relatedElements[_this5.currentImageIndex].dispatchEvent(new Event('error.' + _this5.eventNamespace));
 
         _this5.isAnimating = false;
-        _this5.isOpen = false;
+        _this5.isOpen = true;
         _this5.domNodes.spinner.style.display = 'none';
         var dirIsDefined = direction === 1 || direction === -1;
 
@@ -4784,6 +4788,79 @@ var SimpleLightbox = /*#__PURE__*/function () {
 
         _this6.loadImage(event.currentTarget.classList.contains('sl-next') ? 1 : -1);
       });
+
+      if (this.options.scrollZoom) {
+        var scale = 1;
+        this.addEventListener(this.domNodes.image, ['mousewheel', 'DOMMouseScroll'], function (event) {
+          if (_this6.controlCoordinates.mousedown || _this6.isAnimating || _this6.isClosing || !_this6.isOpen) {
+            return true;
+          }
+
+          if (_this6.controlCoordinates.containerHeight == 0) {
+            _this6.controlCoordinates.containerHeight = _this6.getDimensions(_this6.domNodes.image).height;
+            _this6.controlCoordinates.containerWidth = _this6.getDimensions(_this6.domNodes.image).width;
+            _this6.controlCoordinates.imgHeight = _this6.getDimensions(_this6.currentImage).height;
+            _this6.controlCoordinates.imgWidth = _this6.getDimensions(_this6.currentImage).width;
+            _this6.controlCoordinates.containerOffsetX = _this6.domNodes.image.offsetLeft;
+            _this6.controlCoordinates.containerOffsetY = _this6.domNodes.image.offsetTop;
+            _this6.controlCoordinates.initialOffsetX = parseFloat(_this6.currentImage.dataset.translateX);
+            _this6.controlCoordinates.initialOffsetY = parseFloat(_this6.currentImage.dataset.translateY);
+          }
+
+          event.preventDefault();
+          var delta = event.delta || event.wheelDelta;
+
+          if (delta === undefined) {
+            //we are on firefox
+            delta = event.detail;
+          }
+
+          delta = Math.max(-1, Math.min(1, delta)); // cap the delta to [-1,1] for cross browser consistency
+          // apply zoom
+
+          scale += delta * _this6.options.scrollZoomFactor * scale;
+          scale = Math.max(1, Math.min(_this6.options.maxZoom, scale));
+          _this6.controlCoordinates.targetScale = scale;
+          _this6.controlCoordinates.pinchOffsetX = event.pageX;
+          _this6.controlCoordinates.pinchOffsetY = event.pageY;
+          _this6.controlCoordinates.limitOffsetX = (_this6.controlCoordinates.imgWidth * _this6.controlCoordinates.targetScale - _this6.controlCoordinates.containerWidth) / 2;
+          _this6.controlCoordinates.limitOffsetY = (_this6.controlCoordinates.imgHeight * _this6.controlCoordinates.targetScale - _this6.controlCoordinates.containerHeight) / 2;
+          _this6.controlCoordinates.scaleDifference = _this6.controlCoordinates.targetScale - _this6.controlCoordinates.initialScale;
+          _this6.controlCoordinates.targetOffsetX = _this6.controlCoordinates.imgWidth * _this6.controlCoordinates.targetScale <= _this6.controlCoordinates.containerWidth ? 0 : _this6.minMax(_this6.controlCoordinates.initialOffsetX - (_this6.controlCoordinates.pinchOffsetX - _this6.controlCoordinates.containerOffsetX - _this6.controlCoordinates.containerWidth / 2 - _this6.controlCoordinates.initialOffsetX) / (_this6.controlCoordinates.targetScale - _this6.controlCoordinates.scaleDifference) * _this6.controlCoordinates.scaleDifference, _this6.controlCoordinates.limitOffsetX * -1, _this6.controlCoordinates.limitOffsetX);
+          _this6.controlCoordinates.targetOffsetY = _this6.controlCoordinates.imgHeight * _this6.controlCoordinates.targetScale <= _this6.controlCoordinates.containerHeight ? 0 : _this6.minMax(_this6.controlCoordinates.initialOffsetY - (_this6.controlCoordinates.pinchOffsetY - _this6.controlCoordinates.containerOffsetY - _this6.controlCoordinates.containerHeight / 2 - _this6.controlCoordinates.initialOffsetY) / (_this6.controlCoordinates.targetScale - _this6.controlCoordinates.scaleDifference) * _this6.controlCoordinates.scaleDifference, _this6.controlCoordinates.limitOffsetY * -1, _this6.controlCoordinates.limitOffsetY);
+
+          _this6.zoomPanElement(_this6.controlCoordinates.targetOffsetX + "px", _this6.controlCoordinates.targetOffsetY + "px", _this6.controlCoordinates.targetScale);
+
+          if (_this6.controlCoordinates.targetScale > 1) {
+            _this6.controlCoordinates.zoomed = true;
+
+            if (!_this6.domNodes.caption.style.opacity && _this6.domNodes.caption.style.display !== 'none') {
+              _this6.fadeOut(_this6.domNodes.caption, _this6.options.fadeSpeed);
+            }
+          } else {
+            if (_this6.controlCoordinates.initialScale === 1) {
+              _this6.controlCoordinates.zoomed = false;
+
+              if (_this6.domNodes.caption.style.display === 'none') {
+                _this6.fadeIn(_this6.domNodes.caption, _this6.options.fadeSpeed);
+              }
+            }
+
+            _this6.controlCoordinates.initialPinchDistance = null;
+            _this6.controlCoordinates.capture = false;
+          }
+
+          _this6.controlCoordinates.initialPinchDistance = _this6.controlCoordinates.targetPinchDistance;
+          _this6.controlCoordinates.initialScale = _this6.controlCoordinates.targetScale;
+          _this6.controlCoordinates.initialOffsetX = _this6.controlCoordinates.targetOffsetX;
+          _this6.controlCoordinates.initialOffsetY = _this6.controlCoordinates.targetOffsetY;
+
+          _this6.setZoomData(_this6.controlCoordinates.targetScale, _this6.controlCoordinates.targetOffsetX, _this6.controlCoordinates.targetOffsetY);
+
+          _this6.zoomPanElement(_this6.controlCoordinates.targetOffsetX + "px", _this6.controlCoordinates.targetOffsetY + "px", _this6.controlCoordinates.targetScale);
+        });
+      }
+
       this.addEventListener(this.domNodes.image, ['touchstart.' + this.eventNamespace, 'mousedown.' + this.eventNamespace], function (event) {
         if (event.target.tagName === 'A' && event.type === 'touchstart') {
           return true;
@@ -5098,6 +5175,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
         setTimeout(function () {
           if (_this6.currentImage) {
             _this6.currentImage.classList.remove('sl-transition');
+
+            _this6.currentImage.style[_this6.transitionPrefix + 'transform-origin'] = null;
           }
         }, 200);
         _this6.controlCoordinates.capture = true;
