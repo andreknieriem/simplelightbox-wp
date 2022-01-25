@@ -28,7 +28,7 @@
 	 	className:		php_vars.ar_sl_className,
 	 	widthRatio: 	php_vars.ar_sl_widthRatio,
 	 	heightRatio: 	php_vars.ar_sl_heightRatio,
-		scaleImageToRatio: php_vars.ar_sl_scaleImageToRatio,
+		scaleImageToRatio: (php_vars.ar_sl_scaleImageToRatio == '1') ? true : false,
 	 	disableRightClick:(php_vars.ar_sl_disableRightClick == '1') ? true : false,
 	 	disableScroll:	(php_vars.ar_sl_disableScroll == '1') ? true : false,
 		alertError:     (php_vars.ar_sl_alertError == '1') ? true : false,

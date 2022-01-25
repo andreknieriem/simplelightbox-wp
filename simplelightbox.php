@@ -498,10 +498,10 @@ class SimpleLightbox {
 
         $file = get_option('ar_sl_useLegacy') == 0 ? '/dist/simple-lightbox.min.js' : '/dist/simple-lightbox.legacy.min.js';
 
-		wp_enqueue_script('simplelightbox', plugins_url($file, __FILE__), array(), '2.9.0', true);
+		wp_enqueue_script('simplelightbox', plugins_url($file, __FILE__), array(), '2.10.0', true);
 
 		//== simplelightbox JS hook
-		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array(), '2.9.0', true);
+		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array(), '2.10.0', true);
 		//== simplelghtbox options
 		wp_localize_script('simplelightbox-call', 'php_vars', $this->options);
 		wp_enqueue_script('simplelightbox-call');
@@ -519,8 +519,8 @@ class SimpleLightbox {
 		wp_enqueue_style('simplelightbox-admin-css', plugins_url('/resources/css/ar-sl-admin.css', __FILE__));
 
 		//== js
-		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '2.9.0', true);
-		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '2.9.0', true);
+		wp_enqueue_script('simplelightbox-colorpicker', plugins_url('/resources/js/colorpicker.min.js', __FILE__), array( 'jquery' ), '2.10.0', true);
+		wp_enqueue_script('simplelightbox-admin-js', plugins_url('/resources/js/ar-sl-admin.js', __FILE__), array( 'jquery' ), '2.10.0', true);
 	}
 
 	//== add settings link on plugin page
@@ -533,7 +533,7 @@ class SimpleLightbox {
 	//== the auto add class hook
 	public function autoexpand_rel_wlightbox ($content) {
 		global $post;
-		$pattern     = "/(<a(?![^>]*?rel=['\"]lightbox.*)[^>]*?href=['\"][^'\"]+?\.(?:bmp|gif|jpg|jpeg|png)['\"][^\>]*)>/i";
+		$pattern     = "/(<a(?![^>]*?rel=['\"]lightbox.*)[^>]*?href=['\"][^'\"]+?\.(?:bmp|gif|jpg|jpeg|png|webp)['\"][^\>]*)>/i";
 		$replacement = '$1 class="simplelightbox" rel="lightbox['.$post->ID.']">';
 		$content     = preg_replace($pattern, $replacement, $content);
 		return $content;
