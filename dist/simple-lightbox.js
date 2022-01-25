@@ -2,7 +2,7 @@
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.de
 	Available for use under the MIT License
-	Version 2.9.0
+	Version 2.10.2
 */
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){(function (){
@@ -38,6 +38,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
     _defineProperty(this, "defaultOptions", {
       sourceAttr: 'href',
       overlay: true,
+      overlayOpacity: 0.7,
       spinner: true,
       nav: true,
       navText: ['&lsaquo;', '&rsaquo;'],
@@ -304,7 +305,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
     value: function createDomNodes() {
       this.domNodes.overlay = document.createElement('div');
       this.domNodes.overlay.classList.add('sl-overlay');
-      this.domNodes.overlay.dataset.opacityTarget = ".7";
+      this.domNodes.overlay.dataset.opacityTarget = this.options.overlayOpacity;
       this.domNodes.closeButton = document.createElement('button');
       this.domNodes.closeButton.classList.add('sl-close');
       this.domNodes.closeButton.innerHTML = this.options.closeText;
@@ -435,7 +436,8 @@ var SimpleLightbox = /*#__PURE__*/function () {
       }
 
       this.removeEventListener(document, 'focusin.' + this.eventNamespace);
-      this.fadeOut(document.querySelectorAll('.sl-image img, .sl-overlay, .sl-close, .sl-navigation, .sl-image .sl-caption, .sl-counter'), this.options.fadeSpeed, function () {
+      this.fadeOut(this.domNodes.overlay, this.options.fadeSpeed);
+      this.fadeOut(document.querySelectorAll('.sl-image img,  .sl-close, .sl-navigation, .sl-image .sl-caption, .sl-counter'), this.options.fadeSpeed, function () {
         if (_this2.options.disableScroll) {
           _this2.toggleScrollbar('show');
         }
@@ -665,12 +667,12 @@ var SimpleLightbox = /*#__PURE__*/function () {
           if (_this5.currentImageIndex < _this5.relatedElements.length - 1) {
             _this5.show(_this5.domNodes.navigation.querySelector('.sl-next'));
           }
-        }
-
-        if (_this5.relatedElements.length === 1) {
-          _this5.hide(_this5.domNodes.navigation.querySelectorAll('.sl-prev, .sl-next'));
         } else {
-          _this5.show(_this5.domNodes.navigation.querySelectorAll('.sl-prev, .sl-next'));
+          if (_this5.relatedElements.length === 1) {
+            _this5.hide(_this5.domNodes.navigation.querySelectorAll('.sl-prev, .sl-next'));
+          } else {
+            _this5.show(_this5.domNodes.navigation.querySelectorAll('.sl-prev, .sl-next'));
+          }
         }
 
         if (direction === 1 || direction === -1) {
@@ -1450,7 +1452,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
       try {
         for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
           var element = _step5.value;
-          element.style.opacity = 1;
+          element.style.opacity = parseFloat(element) || window.getComputedStyle(element).getPropertyValue("opacity");
         }
       } catch (err) {
         _iterator5.e(err);
@@ -1471,8 +1473,9 @@ var SimpleLightbox = /*#__PURE__*/function () {
           try {
             for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
               var element = _step6.value;
-              element.style.display = "none";
-              element.style.opacity = '';
+              element.style.display = "none"; // element.style.opacity = '';
+
+              element.style.opacity = 1;
             }
           } catch (err) {
             _iterator6.e(err);
@@ -1555,7 +1558,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
           try {
             for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
               var _element2 = _step10.value;
-              _element2.style.opacity = '';
+              _element2.style.opacity = opacityTarget;
             }
           } catch (err) {
             _iterator10.e(err);
@@ -1580,7 +1583,11 @@ var SimpleLightbox = /*#__PURE__*/function () {
       try {
         for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
           var element = _step11.value;
-          element.dataset.initialDisplay = element.style.display;
+
+          if (element.style.display != 'none') {
+            element.dataset.initialDisplay = element.style.display;
+          }
+
           element.style.display = 'none';
         }
       } catch (err) {
@@ -1714,6 +1721,16 @@ var SimpleLightbox = /*#__PURE__*/function () {
     key: "prev",
     value: function prev() {
       this.loadImage(-1);
+    } // get some useful data
+
+  }, {
+    key: "getLighboxData",
+    value: function getLighboxData() {
+      return {
+        currentImageIndex: this.currentImageIndex,
+        currentImage: this.currentImage,
+        globalScrollbarWidth: this.globalScrollbarWidth
+      };
     } //close is exposed anyways..
 
   }, {

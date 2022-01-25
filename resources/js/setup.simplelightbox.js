@@ -2,6 +2,7 @@
 	var options = {
 		sourceAttr: 	php_vars.ar_sl_sourceAttr,
 		overlay: 		(php_vars.ar_sl_overlay == '1') ? true : false,
+		overlayOpacity: parseFloat(php_vars.ar_sl_overlayOpacity),
 		spinner: 		(php_vars.ar_sl_spinner == '1') ? true : false,
 		nav: 			(php_vars.ar_sl_nav === '1') ? true : false,
 		navText:		[php_vars.ar_sl_navtextPrev,php_vars.ar_sl_navtextNext],
@@ -44,7 +45,7 @@
 		uniqueImages:	(php_vars.ar_sl_uniqueImages == '1') ? true : false,
 		focus:			(php_vars.ar_sl_focus == '1') ? true : false,
 		scrollZoom:		(php_vars.ar_sl_scrollZoom == '1') ? true : false,
-		scrollZoomFactor:(php_vars.ar_sl_focus == '1') ? true : false
+		scrollZoomFactor:parseFloat(php_vars.ar_sl_scrollZoomFactor)
 	}
 
 

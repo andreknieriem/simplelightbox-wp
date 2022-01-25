@@ -3,8 +3,8 @@ Contributors: aknieriem
 Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 5.8.1
-Stable tag: 2.9.0
+Tested up to: 5.9.0
+Stable tag: 2.10.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.10.0 =
+* Added latest simplelightbox.js (2.10.2) with new option and bugfixing
+
 = 2.9.0 =
 * Added latest simplelightbox.js (2.9.0) with 2 new options for mousezooming
 

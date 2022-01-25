@@ -18,6 +18,7 @@ The Plugin only needs to be installed. After that, the plugin works. It scans ev
 | -------- | ------- | ---- | ----------- |
 | sourceAttr | href | string | the attribute used for large images |
 | overlay | true | bool | show an overlay or not |
+| overlayOpacity | 0.7 | float | the opacity of the overlay |
 | spinner | true | bool | show spinner or not |
 | nav | true | bool | show arrow-navigation or not |
 | navText | ['&larr;','&rarr;'] | array | text or html for the navigation arrows |
