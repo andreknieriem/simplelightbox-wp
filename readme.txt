@@ -3,7 +3,7 @@ Contributors: aknieriem
 Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 5.9.0
+Tested up to: 5.9.2
 Stable tag: 2.10.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
