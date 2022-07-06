@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.10.1
+Version: 2.11.0
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -509,8 +509,8 @@ class SimpleLightbox {
 		//== simplelightbox style
 		wp_enqueue_style('simplelightbox-css', plugins_url('/dist/simple-lightbox.min.css', __FILE__));
 
-		add_filter('the_content', array($this, 'autoexpand_rel_wlightbox'), 99);
-		add_filter('the_excerpt', array($this, 'autoexpand_rel_wlightbox'), 99);
+		add_filter('the_content', [$this, 'autoexpand_rel_wlightbox'], 99);
+		add_filter('the_excerpt', [$this, 'autoexpand_rel_wlightbox'], 99);
 	}
 
 	//== load simplelightbox admin components
