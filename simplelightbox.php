@@ -324,9 +324,9 @@ class SimpleLightbox {
                 'desc'  => __('adds class to html element if lightbox is open. If empty or false no class is set', 'simplelightbox')
             ),
             'ar_sl_rtl' => array(
-                'type' => 'checkbox',
-                'label' => __('Close on browser back button','simplelightbox'),
-                'desc' => __('enable history back closes lightbox instead of reloading the page','simplelightbox')
+                'type'  => 'checkbox',
+                'label' => __('Enable RTL direction','simplelightbox'),
+                'desc'  => __('advance slides with the left arrow or left button, for use with content in right-to-left languages','simplelightbox')
             ),
             'ar_sl_fixedClass' => array(
                 'type'  => 'text',
