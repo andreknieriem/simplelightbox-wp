@@ -503,7 +503,7 @@ class SimpleLightbox {
 		//== simplelightbox JS hook
 		wp_register_script('simplelightbox-call', plugins_url('/resources/js/setup.simplelightbox.js', __FILE__), array(), '2.10.0', true);
 		//== simplelghtbox options
-		wp_localize_script('simplelightbox-call', 'php_vars', $this->options);
+		wp_localize_script('simplelightbox-call', 'php_vars', apply_filters( 'simplelightbox_options', $this->options));
 		wp_enqueue_script('simplelightbox-call');
 
 		//== simplelightbox style
