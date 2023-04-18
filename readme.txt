@@ -44,7 +44,7 @@ for questions, answers, support and feature requests.
 
 == Changelog ==
 = 2.13.0 =
-* Updated to latest simplelightbox version and fixing design break in backend
+* Updated to latest simplelightbox version and fixing design break in backend; fixing caption opacity;
 
 = 2.12.0 =
 * Updated to latest simplelightbox version
