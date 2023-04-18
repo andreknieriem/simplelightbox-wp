@@ -541,13 +541,16 @@ class SimpleLightbox {
 
 	//== overwrite css file on save
 	public function output_css() {
+        list($r, $g, $b) = sscanf($this->options['ar_sl_captionColor'], "#%02x%02x%02x");
+        $captionBg = 'rgba('.$r.','.$g.','.$b.','.$this->options['ar_sl_captionOpacity'].')';
+
 		echo '<style>
 .sl-overlay{background:'.$this->options['ar_sl_overlayColor'].';opacity: '.$this->options['ar_sl_overlayOpacity'].';z-index: '.($this->options['ar_sl_zindex'] + 35).';}
 .sl-wrapper .sl-navigation button,.sl-wrapper .sl-close,.sl-wrapper .sl-counter{color:'.$this->options['ar_sl_btnColor'].';z-index: '.($this->options['ar_sl_zindex'] + 9060).';}
 .sl-wrapper .sl-image{z-index:'.($this->options['ar_sl_zindex'] + 9000).';}
 .sl-spinner{border-color:'.$this->options['ar_sl_loaderColor'].';z-index:'.($this->options['ar_sl_zindex'] + 7).';}
 .sl-wrapper{z-index:'.($this->options['ar_sl_zindex'] +40) .';}
-.sl-wrapper .sl-image .sl-caption{background:'.$this->options['ar_sl_captionColor'].';color:'.$this->options['ar_sl_captionFontColor'].';opacity:'.$this->options['ar_sl_captionOpacity'].';}
+.sl-wrapper .sl-image .sl-caption{background:'.$captionBg.';color:'.$this->options['ar_sl_captionFontColor'].';}
 </style>';
 	}
 }
