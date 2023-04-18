@@ -2,34 +2,34 @@
   max-width: 700px;
 	h3 {
 	  background: #fff;
-    border: 1px solid #eee;
-    font-size: 14px;
-    padding: 8px 12px;
-    margin: 20px 0 0 0;
-    position: relative;
-    cursor: pointer;
-    &:after {
-      right: 0;
-      font: 400 20px/1 dashicons;
-      speak: none;
-      display: inline-block;
-      padding: 8px 10px;
-      top: 0;
-      position: absolute;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-decoration: none!important;
-      content: '\f142';
-    }
-    
-    &.closed {
+      border: 1px solid #eee;
+      font-size: 14px;
+      padding: 8px 12px;
+      margin: 20px 0 0 0;
+      position: relative;
+      cursor: pointer;
       &:after {
-        content: '\f140';
+        right: 0;
+        font: 400 20px/1 dashicons;
+        speak: none;
+        display: inline-block;
+        padding: 8px 10px;
+        top: 0;
+        position: absolute;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-decoration: none!important;
+        content: '\f142';
       }
-      box-shadow: 0 1px 1px rgba(0,0,0,.04);
-      -moz-box-shadow: 0 1px 1px rgba(0,0,0,.04);
-      -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    }
+
+      &.closed {
+        &:after {
+          content: '\f140';
+        }
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+      }
 	}
 	
 	table.form-table {
@@ -38,12 +38,12 @@
 	  padding: 0 12px 11px;
 	  border: 1px solid #eee;
 	  border-top: 0 none;
-    border-collapse: separate;
+      border-collapse: separate;
     
-    &.closed {
-      display: none;
-    }
-    
+      &.closed {
+        display: none;
+      }
+
 	}
 	
 	.colorWrap {
@@ -51,20 +51,39 @@
 	  float: left;
 	  .colorSelector {
 	    position: absolute;
-      right: -2px;
-      top: -3px;
-    }
+        right: -2px;
+        top: -3px;
+      }
 	}
 
-  .colorpicker {
-    width: 356px;
-    height: 176px;
-    overflow: hidden;
+  .colorSelector {
     position: absolute;
-    background: url(../img/colorpicker_background.png);
-    font-family: Arial, Helvetica, sans-serif;
-    display: none;
+    top: 3px;
+    right: 0px;
+    width: 36px;
+    height: 36px;
+    background: url(../img/select2.png);
+
+    div {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 28px;
+      height: 28px;
+      background: url(../img/select2.png) center;
+    }
   }
+}
+
+.ar-sl-colorpicker {
+  width: 356px;
+  height: 176px;
+  overflow: hidden;
+  position: absolute;
+  background: url(../img/colorpicker_background.png);
+  font-family: Arial, Helvetica, sans-serif;
+  display: none;
+
   .colorpicker_color {
     width: 150px;
     height: 150px;
@@ -74,25 +93,28 @@
     background: #f00;
     overflow: hidden;
     cursor: crosshair;
+
+    div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+      background: url(../img/colorpicker_overlay.png);
+
+      div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 11px;
+        height: 11px;
+        overflow: hidden;
+        background: url(../img/colorpicker_select.gif);
+        margin: -5px 0 0 -5px;
+      }
+    }
   }
-  .colorpicker_color div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 150px;
-    background: url(../img/colorpicker_overlay.png);
-  }
-  .colorpicker_color div div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 11px;
-    height: 11px;
-    overflow: hidden;
-    background: url(../img/colorpicker_select.gif);
-    margin: -5px 0 0 -5px;
-  }
+
   .colorpicker_hue {
     position: absolute;
     top: 13px;
@@ -216,27 +238,5 @@
   }
   .colorpicker_slider {
     background-position: bottom;
-  }
-
-  .colorSelector {
-    position: absolute;
-    top: 3px;
-    right: 0px;
-    width: 36px;
-    height: 36px;
-    background: url(../img/select2.png);
-
-    div {
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      width: 28px;
-      height: 28px;
-      background: url(../img/select2.png) center;
-    }
-  }
-
-  .colorWrap {
-    position: relative;
   }
 }
