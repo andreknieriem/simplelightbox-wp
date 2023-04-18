@@ -1,0 +1,34 @@
+{
+  "name": "simplelightbox-wp",
+  "version": "2.13.0",
+  "description": "Touch-friendly modern image lightbox for mobile and desktop with optional jQuery support",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "core-js": "^3.14.0",
+    "gulp": "^4.0.2",
+    "gulp-append-prepend": "^1.0.9",
+    "gulp-sass": "^5.1.0",
+    "node-sass": "^7.0.0"
+  },
+  "keywords": [
+    "lightbox",
+    "modal",
+    "gallery",
+    "jquery-plugin",
+    "touchfriendly",
+    "pinch",
+    "responsive",
+    "popup",
+    "dialog"
+  ],
+  "author": {
+    "name": "Andre Rinas",
+    "url": "https://www.andrerinas.de",
+    "email": "info@andrerinas.de"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andreknieriem/simplelightbox-wp/issues"
+  },
+  "homepage": "https://simplelightbox.com/"
+}

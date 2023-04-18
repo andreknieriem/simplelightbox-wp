@@ -4,7 +4,7 @@ Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
 Tested up to: 6.0.0
-Stable tag: 2.11.0
+Stable tag: 2.13.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,12 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.13.0 =
+* Updated to latest simplelightbox version and fixing design break in backend
+
+= 2.12.0 =
+* Updated to latest simplelightbox version
+
 = 2.11.0 =
 * Fixing not working lightbox on newer templates
 
