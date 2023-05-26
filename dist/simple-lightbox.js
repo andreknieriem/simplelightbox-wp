@@ -2,7 +2,7 @@
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.com
 	Available for use under the MIT License
-	Version 2.13.0
+	Version 2.14.1
 */
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){(function (){
@@ -253,6 +253,24 @@ var SimpleLightbox = /*#__PURE__*/function () {
       return supportsPassive;
     }
   }, {
+    key: "getCaptionElement",
+    value: function getCaptionElement(elem) {
+      // look at sibling selector
+      if (this.options.captionSelector.startsWith('+')) {
+        var selector = this.options.captionSelector.replace(/^\+/, '').trimStart();
+        var sibling = elem.nextElementSibling;
+        if (sibling.matches(selector)) {
+          return sibling;
+        }
+        return false;
+      } else if (this.options.captionSelector.startsWith('>')) {
+        var _selector = this.options.captionSelector.replace(/^>/, '').trimStart();
+        return elem.querySelector(_selector);
+      } else {
+        return elem.querySelector(this.options.captionSelector);
+      }
+    }
+  }, {
     key: "generateQuerySelector",
     value: function generateQuerySelector(elem) {
       var tagName = elem.tagName,
@@ -420,7 +438,9 @@ var SimpleLightbox = /*#__PURE__*/function () {
           document.querySelector('html').classList.remove(_this2.options.htmlClass);
         }
         document.body.removeChild(_this2.domNodes.wrapper);
-        document.body.removeChild(_this2.domNodes.overlay);
+        if (_this2.options.overlay) {
+          document.body.removeChild(_this2.domNodes.overlay);
+        }
         _this2.domNodes.additionalHtml = null;
         _this2.domNodes.download = null;
         element.dispatchEvent(new Event('closed.simplelightbox'));
@@ -578,7 +598,7 @@ var SimpleLightbox = /*#__PURE__*/function () {
         _this5.isOpen = true;
         var captionContainer, captionText;
         if (typeof _this5.options.captionSelector === 'string') {
-          captionContainer = _this5.options.captionSelector === 'self' ? _this5.relatedElements[_this5.currentImageIndex] : document.querySelector(_this5.generateQuerySelector(_this5.relatedElements[_this5.currentImageIndex]) + ' ' + _this5.options.captionSelector);
+          captionContainer = _this5.options.captionSelector === 'self' ? _this5.relatedElements[_this5.currentImageIndex] : _this5.getCaptionElement(_this5.relatedElements[_this5.currentImageIndex]);
         } else if (typeof _this5.options.captionSelector === 'function') {
           captionContainer = _this5.options.captionSelector(_this5.relatedElements[_this5.currentImageIndex]);
         }
@@ -1483,14 +1503,24 @@ var SimpleLightbox = /*#__PURE__*/function () {
   }, {
     key: "open",
     value: function open(elem) {
+      var position = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       elem = elem || this.elements[0];
       if (typeof jQuery !== "undefined" && elem instanceof jQuery) {
         elem = elem.get(0);
+      }
+      if (position > 0) {
+        elem = this.elements[position];
       }
       this.initialImageIndex = this.elements.indexOf(elem);
       if (this.initialImageIndex > -1) {
         this.openImage(elem);
       }
+    }
+  }, {
+    key: "openPosition",
+    value: function openPosition(position) {
+      var elem = this.elements[position];
+      this.open(elem, position);
     }
   }, {
     key: "next",

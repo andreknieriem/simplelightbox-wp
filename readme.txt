@@ -43,6 +43,12 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.14.1 =
+* Updated to latest simplelightbox version
+
+= 2.14.0 =
+* Updated to latest simplelightbox version
+
 = 2.13.0 =
 * Updated to latest simplelightbox version and fixing design break in backend; fixing caption opacity;
 

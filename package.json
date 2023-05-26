@@ -1,6 +1,6 @@
 {
   "name": "simplelightbox-wp",
-  "version": "2.13.0",
+  "version": "2.14.1",
   "description": "Touch-friendly modern image lightbox for mobile and desktop with optional jQuery support",
   "devDependencies": {
     "browserify": "^17.0.0",
