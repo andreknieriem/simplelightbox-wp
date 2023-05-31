@@ -4,7 +4,7 @@ Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
 Tested up to: 6.0.0
-Stable tag: 2.13.0
+Stable tag: 2.14.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
