@@ -49,12 +49,18 @@
 	}
 	// fixing not working lightbox in some themes
 	var anchors = document.querySelectorAll("a");
-	var thumbnails = Array.from(anchors).filter(function(item) {
-		return /\.(jpe?g|png|gif|mp4|webp|bmp|pdf)(\?[^/]*)*$/i.test(item.getAttribute("href"));
-	});
+	if(php_vars.ar_sl_fileExt == 'false') {
+		var thumbnails = [];
+	} else {
+		var thumbnails = Array.from(anchors).filter(function(item) {
+			return /\.(php_vars.ar_sl_fileExt)(\?[^/]*)*$/i.test(item.getAttribute("href"));
+		});
+	}
 
-	for (const thumbnail of thumbnails) {
-		thumbnail.classList.add('simplelightbox');
+	if(thumbnails.length) {
+		for (const thumbnail of thumbnails) {
+			thumbnail.classList.add('simplelightbox');
+		}
 	}
 
 	if(document.querySelectorAll('a.simplelightbox').length ) {
