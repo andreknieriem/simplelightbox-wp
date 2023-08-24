@@ -52,8 +52,10 @@
 	if(php_vars.ar_sl_fileExt == 'false') {
 		var thumbnails = [];
 	} else {
+		var fileExt = '\\.('+php_vars.ar_sl_fileExt+')(\\?[^/]*)*$';
+		var matcher = new RegExp(fileExt, "i");
 		var thumbnails = Array.from(anchors).filter(function(item) {
-			return /\.(php_vars.ar_sl_fileExt)(\?[^/]*)*$/i.test(item.getAttribute("href"));
+			return matcher.test(item.getAttribute("href"));
 		});
 	}
 
