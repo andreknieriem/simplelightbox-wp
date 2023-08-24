@@ -3,8 +3,8 @@ Contributors: aknieriem
 Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
-Tested up to: 6.2.2
-Stable tag: 2.14.2
+Tested up to: 6.3.0
+Stable tag: 2.14.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.14.3 =
+* Fixing not using fileExt error on regex and updated to latest simplelightbox version
+
 = 2.14.2 =
 * Fixing not using fileExt on special theme links
 
