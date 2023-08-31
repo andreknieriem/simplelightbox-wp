@@ -3,7 +3,7 @@
 Plugin Name: Simplelightbox
 Plugin URI: https://simplelightbox.com
 Description: Touch-friendly image lightbox for mobile and desktop with no need of jQuery for Wordpress
-Version: 2.14.2
+Version: 2.14.4
 Author: Andre Rinas
 Author URI: https://www.andrerinas.de
 Support URI: https://github.com/andreknieriem/simplelightbox-wp
@@ -36,6 +36,7 @@ class SimpleLightbox {
 			'ar_sl_captionPosition'  => 'bottom',
 			'ar_sl_captionDelay'     => 0,
 			'ar_sl_captionClass'     => '',
+			'ar_sl_captionHTML'      => 1,
 			'ar_sl_close'            => 1,
 			'ar_sl_closeText'        => '×',
 			'ar_sl_swipeClose'       => 1,
@@ -189,6 +190,11 @@ class SimpleLightbox {
                 'type' => 'text',
                 'label' => __('Caption Class', 'simplelightbox'),
                 'desc' => __('adds an additional class to the sl-caption', 'simplelightbox')
+            ),
+            'ar_sl_captionHTML' => array(
+                'type'  => 'checkbox',
+                'label' => __('Allow html in captions', 'simplelightbox'),
+                'desc'  => __('Wether or not to allow HTML in captions, defaults to true for legacy reasons', 'simplelightbox')
             ),
 			'ar_sl_close' => array(
 				'type'  => 'checkbox',

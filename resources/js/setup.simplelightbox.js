@@ -13,6 +13,7 @@
 		captionPosition:php_vars.ar_sl_captionPosition,
 		captionDelay:   parseInt(php_vars.ar_sl_captionDelay,10),
 		captionClass:   php_vars.ar_sl_captionClass,
+		captionHTML:    (php_vars.ar_sl_captionHTML === '1') ? true : false,
 		close:			(php_vars.ar_sl_close === '1') ? true : false,
 		closeText:		php_vars.ar_sl_closeText,
 		showCounter:	(php_vars.ar_sl_showCounter === '1') ? true : false,

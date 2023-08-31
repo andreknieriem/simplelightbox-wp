@@ -4,7 +4,7 @@ Donate link: https://paypal.me/anrinas
 Tags: lightbox, simple, image, overlay, modal, dialog
 Requires at least: 3.0.1
 Tested up to: 6.3.0
-Stable tag: 2.14.3
+Stable tag: 2.14.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -43,6 +43,9 @@ for questions, answers, support and feature requests.
 1. Admin page where you setup the plugin
 
 == Changelog ==
+= 2.14.4 =
+* Updating to latest simplelightbox version which fixes captionSelector error.
+
 = 2.14.3 =
 * Fixing not using fileExt error on regex and updated to latest simplelightbox version
 
